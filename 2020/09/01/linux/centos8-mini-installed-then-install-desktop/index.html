@@ -1,71 +1,388 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-  
-  <title>CentOS 8 Mini installed then installation Desktop | FALKON&#39;S TECH BLOG</title>
-  <meta name="author" content="Falkon">
-  
-  <meta name="description" content="Centos 8 系列如果默认以文本模式或者最小话安装，后期需要安装图形桌面的安装及设置">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    
+    <title>CentOS 8 Mini installed then installation Desktop | RmVsaXg</title>
+    
+    
+        <meta name="keywords" content="CentOS8" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Centos 8 系列如果默认以文本模式或者最小话安装，后期需要安装图形桌面的安装及设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CentOS 8 Mini installed then installation Desktop">
+<meta property="og:url" content="http://falkon.cn/2020/09/01/linux/centos8-mini-installed-then-install-desktop/index.html">
+<meta property="og:site_name" content="RmVsaXg">
+<meta property="og:description" content="Centos 8 系列如果默认以文本模式或者最小话安装，后期需要安装图形桌面的安装及设置">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-01T09:21:40.484Z">
+<meta property="article:modified_time" content="2020-09-15T08:26:45.316Z">
+<meta property="article:author" content="Felix">
+<meta property="article:tag" content="CentOS8">
+<meta name="twitter:card" content="summary">
+    
 
-  <meta property="og:title" content="CentOS 8 Mini installed then installation Desktop"/>
-  <meta property="og:site_name" content="FALKON&#39;S TECH BLOG"/>
+    
+        <link rel="alternate" href="/atom.xml" title="RmVsaXg" type="application/atom+xml" />
+    
 
-  
-    <meta property="og:image" content=""/>
-  
+    
+        <link rel="icon" href="/favicon.png" />
+    
 
-  <link href="/images/favicon.png" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="FALKON&#39;S TECH BLOG" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
 
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
 <meta name="generator" content="Hexo 4.2.0"></head>
 
-
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">FALKON&#39;S TECH BLOG</a></h1>
-  <h2><a href="/">Record life, record me.</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-      <li><a href="/project">Project</a></li>
-    
-      <li><a href="/about">About</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-linux/centos8-mini-installed-then-install-desktop" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2020-09-01T09:21:40.484Z"><a href="/2020/09/01/linux/centos8-mini-installed-then-install-desktop/">2020-09-01</a></time>
-      
-      
-  
-    <h1 class="p-name title" itemprop="headline name">CentOS 8 Mini installed then installation Desktop</h1>
-  
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">RmVsaXg</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
 
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
-        <ul>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/06/10/linux/zabbix50-compile-installation/">Zabbix 5.0 编译安装</a></li>  <li class="file"><a href="/2020/08/26/linux/zabbix50-add-chinese-language/">Zabbix5.0添加中文</a></li>  <li class="file"><a href="/2020/08/26/linux/zabbix50-server-is-not-running/">ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/12/linux/linux-extend-swap/">Linux扩展swap分区</a></li>  <li class="file"><a href="/2020/06/30/linux/linux78-config-vncserver/">Linux 7.8安装配置VNCSERVER</a></li>  <li class="file active"><a href="/2020/09/01/linux/centos8-mini-installed-then-install-desktop/">CentOS 8 Mini installed then installation Desktop</a></li>  <li class="file"><a href="/2020/11/11/linux/linux-create-zombie-processes-and-killed/">Linux下创建模拟僵尸进程并杀死</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/mysql57-installation-for-centos78/">MySQL5.7在CentOS7.8平台上的部署</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            NAS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/23/linux/openfiler-installation-and-configuration/">Openfiler安装配置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/09/database/oracle-12c-single-node-installation-psu-patch/">Oracle 12c单节点RAC安装PSU补丁程序</a></li>  <li class="file"><a href="/2020/03/09/database/ora-01804-failure-to-initialize-timezone-information/">ORA-01804 failure to initialize timezone information</a></li>  <li class="file"><a href="/2020/03/09/database/ora-65500-could-not-modify-db_unique_name-resource-exists/">ORA-65500 could not modify DB_UNIQUE_NAME, resource exists</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle12c-rac/">Linux Installation Oracle 12c RAC</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle11g/">Linux Installation Oracle 11g</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle11g-ogg/">Linux Installation Oracle11g GoldenGate</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle11g-rac/">Linux Installation 11g RAC</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle12c/">Linux Installation Oracle 12c</a></li>  <li class="file"><a href="/2020/03/13/database/expdp-impdp/">Oracle 数据泵的基本使用</a></li>  <li class="file"><a href="/2020/03/13/database/exp-imp/">Oracle 导入导出工具的基本使用</a></li>  <li class="file"><a href="/2020/03/13/database/ora-28000-the-account-is-locked/">ORA-28000 the account is locked</a></li>  <li class="file"><a href="/2020/03/21/database/oracle-12c-pdb-clone/">Oracle 12c PDB克隆</a></li>  <li class="file"><a href="/2020/03/22/database/asm-req_mir_free_mb-test/">ASM中的Req_mir_free_MB实验</a></li>  <li class="file"><a href="/2020/04/03/database/oracle-audit-files-delete-test/">Oracle Audit目录中文件的内容以及是否可以删除</a></li>  <li class="file"><a href="/2020/04/07/database/ora-00980-synonym-translation-is-no-longer-valid/">ORA-00980 synonym translation is no longer valid</a></li>  <li class="file"><a href="/2020/04/29/database/ora-00600-internal-error-code-parameter-4511/">ORA-00600 内部错误代码 参数 [4511]</a></li>  <li class="file"><a href="/2020/06/10/database/oracle-12c-cloud-depoly-and-local-silent-installation/">Oracle 12c 云上部署和本地静默安装</a></li>  <li class="file"><a href="/2020/07/21/database/oracle-flex-asm-advantages-and-disadvantages/">深入了解Oracle Flex ASM及其优点</a></li>  <li class="file"><a href="/2020/08/03/database/oracle-asm-lun-size/">Oracle ASM LUN Size</a></li>  <li class="file"><a href="/2020/08/12/database/patch-30830913-apply-with%20errors/">Oracle 19.5 Patch 30830913 apply (pdb CDB$ROOT) WITH ERRORS</a></li>  <li class="file"><a href="/2020/08/26/database/pga_aggregate_target-specified-is-high/">PGA_AGGREGATE_TARGET specified is high</a></li>  <li class="file"><a href="/2020/09/08/database/oracle-dcd/">Oracle DCD详解</a></li>  <li class="file"><a href="/2020/10/21/database/oracle-12c-varchar2-extended/">Oracle 12c varchar2字段长度扩展</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Database Appliance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/23/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Enterprise Manager Cloud Control
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/06/10/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">The plug-in BI Publisher Configuration has failed its perform method</a></li>  <li class="file"><a href="/2020/12/02/database/emcc134-oracle-management-server-could-not-be-started/">EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            SQL Server
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/12/22/database/sqlserver-installation-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-linux/centos8-mini-installed-then-install-desktop" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CentOS8/" rel="tag">CentOS8</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/09/01/linux/centos8-mini-installed-then-install-desktop/">
+            <time datetime="2020-09-01T09:21:40.484Z" itemprop="datePublished">2020-09-01</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/raw/writing/source/_posts/linux/centos8-mini-installed-then-install-desktop.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/edit/writing/source/_posts/linux/centos8-mini-installed-then-install-desktop.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/commits/writing/source/_posts/linux/centos8-mini-installed-then-install-desktop.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            CentOS 8 Mini installed then installation Desktop
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <ul>
 <li>Centos 8 系列如果默认以文本模式或者最小话安装，后期需要安装图形桌面的安装及设置</li>
 </ul>
 <a id="more"></a>
@@ -91,199 +408,132 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yongstoneinc yum.repos.d]<span class="comment"># yum groupremove "Server with GUI"</span></span><br><span class="line">Last metadata expiration check: 0:05:31 ago on Thu 13 Aug 2020 12:47:36 AM CST.</span><br><span class="line">no group <span class="string">'dns-server'</span> from environment <span class="string">'graphical-server-environment'</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"insights-client"</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"hpijs"</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"centos-release-eula"</span></span><br><span class="line">Dependencies resolved.</span><br><span class="line">......</span><br><span class="line">Transaction Summary</span><br><span class="line">==============================================================================================</span><br><span class="line">Install  929 Packages</span><br></pre></td></tr></table></figure>
 
 
-      
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
     </div>
-    <footer>
-      
-        
-  
-  <div class="categories">
-    <a href="/categories/Linux/">Linux</a>
-  </div>
-
-        
-  
-  <div class="tags">
-    <a href="/tags/CentOS8/">CentOS8</a>
-  </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
 </article>
 
 
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://falkon.cn/2020/09/01/linux/centos8-mini-installed-then-install-desktop/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="as_sitesearch" value="falkon.cn">
-  </form>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">Categories</h3>
-  <ul class="entry">
-  
-    <li><a href="/categories/Database/">Database</a><small>23</small></li>
-  
-    <li><a href="/categories/Linux/">Linux</a><small>8</small></li>
-  
-  </ul>
-</div>
-
-
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/10g/">10g</a><small>1</small></li>
-  
-    <li><a href="/tags/11g/">11g</a><small>3</small></li>
-  
-    <li><a href="/tags/12c/">12c</a><small>4</small></li>
-  
-    <li><a href="/tags/19c/">19c</a><small>2</small></li>
-  
-    <li><a href="/tags/19g/">19g</a><small>1</small></li>
-  
-    <li><a href="/tags/AFD/">AFD</a><small>1</small></li>
-  
-    <li><a href="/tags/ASM/">ASM</a><small>3</small></li>
-  
-    <li><a href="/tags/Audit/">Audit</a><small>1</small></li>
-  
-    <li><a href="/tags/CentOS8/">CentOS8</a><small>1</small></li>
-  
-    <li><a href="/tags/Cloud/">Cloud</a><small>1</small></li>
-  
-    <li><a href="/tags/EMCC/">EMCC</a><small>1</small></li>
-  
-    <li><a href="/tags/EXP-IMP/">EXP/IMP</a><small>1</small></li>
-  
-    <li><a href="/tags/EXPDP-IMPDP/">EXPDP/IMPDP</a><small>1</small></li>
-  
-    <li><a href="/tags/Flex/">Flex</a><small>1</small></li>
-  
-    <li><a href="/tags/GoldenGate/">GoldenGate</a><small>1</small></li>
-  
-    <li><a href="/tags/Install/">Install</a><small>1</small></li>
-  
-    <li><a href="/tags/LUN/">LUN</a><small>1</small></li>
-  
-    <li><a href="/tags/Linux/">Linux</a><small>1</small></li>
-  
-    <li><a href="/tags/ODA/">ODA</a><small>1</small></li>
-  
-    <li><a href="/tags/OJVM/">OJVM</a><small>1</small></li>
-  
-    <li><a href="/tags/ORA-00700/">ORA-00700</a><small>1</small></li>
-  
-    <li><a href="/tags/ORA-01804/">ORA-01804</a><small>1</small></li>
-  
-    <li><a href="/tags/ORA-28000/">ORA-28000</a><small>1</small></li>
-  
-    <li><a href="/tags/ORA-600/">ORA-600</a><small>1</small></li>
-  
-    <li><a href="/tags/ORA-65500/">ORA-65500</a><small>1</small></li>
-  
-    <li><a href="/tags/Openfiler/">Openfiler</a><small>1</small></li>
-  
-    <li><a href="/tags/PDB/">PDB</a><small>1</small></li>
-  
-    <li><a href="/tags/PSU/">PSU</a><small>1</small></li>
-  
-    <li><a href="/tags/Patch/">Patch</a><small>1</small></li>
-  
-    <li><a href="/tags/RAC/">RAC</a><small>3</small></li>
-  
-    <li><a href="/tags/Req-mir-free-MB/">Req_mir_free_MB</a><small>1</small></li>
-  
-    <li><a href="/tags/SWAP/">SWAP</a><small>1</small></li>
-  
-    <li><a href="/tags/Silent/">Silent</a><small>1</small></li>
-  
-    <li><a href="/tags/Synonym/">Synonym</a><small>1</small></li>
-  
-    <li><a href="/tags/UDEV/">UDEV</a><small>1</small></li>
-  
-    <li><a href="/tags/VNC/">VNC</a><small>1</small></li>
-  
-    <li><a href="/tags/Zabbix/">Zabbix</a><small>3</small></li>
-  
-    <li><a href="/tags/Zombie/">Zombie</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2020 Falkon
-  
-</div>
-<div class="clearfix"></div></footer>
-  
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
+    
+<nav id="article-nav">
+    
+        <a href="/2020/09/08/database/oracle-dcd/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Oracle DCD详解
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2020/08/26/linux/zabbix50-server-is-not-running/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT</div>
+        </a>
+    
+</nav>
 
 
 
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
 <script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Felix &copy; 2021 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
 
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
 </body>
 </html>

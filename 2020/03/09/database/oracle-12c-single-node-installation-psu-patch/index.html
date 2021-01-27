@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Oracle 12c单节点RAC安装PSU补丁程序 | RmVsaXg</title>
+    
+    
+        <meta name="keywords" content="12c,PSU" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="描述：单节点RAC，数据库版本12.2.0.1下载最新OPatch，补丁编号6880880,升级Grid和OracleHome的OPatch 123456789101112131415161718# 升级Grid的OPatch[root@auxsbdb12c grid]# mv OPatch&#x2F; OPatch.bak[root@auxsbdb12c home]# cp -r OPatch&#x2F; &#x2F;u01">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle 12c单节点RAC安装PSU补丁程序">
+<meta property="og:url" content="http://falkon.cn/2020/03/09/database/oracle-12c-single-node-installation-psu-patch/index.html">
+<meta property="og:site_name" content="RmVsaXg">
+<meta property="og:description" content="描述：单节点RAC，数据库版本12.2.0.1下载最新OPatch，补丁编号6880880,升级Grid和OracleHome的OPatch 123456789101112131415161718# 升级Grid的OPatch[root@auxsbdb12c grid]# mv OPatch&#x2F; OPatch.bak[root@auxsbdb12c home]# cp -r OPatch&#x2F; &#x2F;u01">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-08T17:25:31.025Z">
+<meta property="article:modified_time" content="2021-01-27T03:09:46.103Z">
+<meta property="article:author" content="Felix">
+<meta property="article:tag" content="12c">
+<meta property="article:tag" content="PSU">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RmVsaXg" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">RmVsaXg</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/06/10/linux/zabbix50-compile-installation/">Zabbix 5.0 编译安装</a></li>  <li class="file"><a href="/2020/08/26/linux/zabbix50-add-chinese-language/">Zabbix5.0添加中文</a></li>  <li class="file"><a href="/2020/08/26/linux/zabbix50-server-is-not-running/">ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/12/linux/linux-extend-swap/">Linux扩展swap分区</a></li>  <li class="file"><a href="/2020/06/30/linux/linux78-config-vncserver/">Linux 7.8安装配置VNCSERVER</a></li>  <li class="file"><a href="/2020/09/01/linux/centos8-mini-installed-then-install-desktop/">CentOS 8 Mini installed then installation Desktop</a></li>  <li class="file"><a href="/2020/11/11/linux/linux-create-zombie-processes-and-killed/">Linux下创建模拟僵尸进程并杀死</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/mysql57-installation-for-centos78/">MySQL5.7在CentOS7.8平台上的部署</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            NAS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/23/linux/openfiler-installation-and-configuration/">Openfiler安装配置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file active"><a href="/2020/03/09/database/oracle-12c-single-node-installation-psu-patch/">Oracle 12c单节点RAC安装PSU补丁程序</a></li>  <li class="file"><a href="/2020/03/09/database/ora-01804-failure-to-initialize-timezone-information/">ORA-01804 failure to initialize timezone information</a></li>  <li class="file"><a href="/2020/03/09/database/ora-65500-could-not-modify-db_unique_name-resource-exists/">ORA-65500 could not modify DB_UNIQUE_NAME, resource exists</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle12c-rac/">Linux Installation Oracle 12c RAC</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle11g/">Linux Installation Oracle 11g</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle11g-ogg/">Linux Installation Oracle11g GoldenGate</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle11g-rac/">Linux Installation 11g RAC</a></li>  <li class="file"><a href="/2020/03/10/database/rhel-install-oracle12c/">Linux Installation Oracle 12c</a></li>  <li class="file"><a href="/2020/03/13/database/expdp-impdp/">Oracle 数据泵的基本使用</a></li>  <li class="file"><a href="/2020/03/13/database/exp-imp/">Oracle 导入导出工具的基本使用</a></li>  <li class="file"><a href="/2020/03/13/database/ora-28000-the-account-is-locked/">ORA-28000 the account is locked</a></li>  <li class="file"><a href="/2020/03/21/database/oracle-12c-pdb-clone/">Oracle 12c PDB克隆</a></li>  <li class="file"><a href="/2020/03/22/database/asm-req_mir_free_mb-test/">ASM中的Req_mir_free_MB实验</a></li>  <li class="file"><a href="/2020/04/03/database/oracle-audit-files-delete-test/">Oracle Audit目录中文件的内容以及是否可以删除</a></li>  <li class="file"><a href="/2020/04/07/database/ora-00980-synonym-translation-is-no-longer-valid/">ORA-00980 synonym translation is no longer valid</a></li>  <li class="file"><a href="/2020/04/29/database/ora-00600-internal-error-code-parameter-4511/">ORA-00600 内部错误代码 参数 [4511]</a></li>  <li class="file"><a href="/2020/06/10/database/oracle-12c-cloud-depoly-and-local-silent-installation/">Oracle 12c 云上部署和本地静默安装</a></li>  <li class="file"><a href="/2020/07/21/database/oracle-flex-asm-advantages-and-disadvantages/">深入了解Oracle Flex ASM及其优点</a></li>  <li class="file"><a href="/2020/08/03/database/oracle-asm-lun-size/">Oracle ASM LUN Size</a></li>  <li class="file"><a href="/2020/08/12/database/patch-30830913-apply-with%20errors/">Oracle 19.5 Patch 30830913 apply (pdb CDB$ROOT) WITH ERRORS</a></li>  <li class="file"><a href="/2020/08/26/database/pga_aggregate_target-specified-is-high/">PGA_AGGREGATE_TARGET specified is high</a></li>  <li class="file"><a href="/2020/09/08/database/oracle-dcd/">Oracle DCD详解</a></li>  <li class="file"><a href="/2020/10/21/database/oracle-12c-varchar2-extended/">Oracle 12c varchar2字段长度扩展</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Database Appliance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/03/23/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Enterprise Manager Cloud Control
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/06/10/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">The plug-in BI Publisher Configuration has failed its perform method</a></li>  <li class="file"><a href="/2020/12/02/database/emcc134-oracle-management-server-could-not-be-started/">EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            SQL Server
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2020/12/22/database/sqlserver-installation-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-database/oracle-12c-single-node-installation-psu-patch" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/12c/" rel="tag">12c</a>, <a class="tag-link" href="/tags/PSU/" rel="tag">PSU</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2020/03/09/database/oracle-12c-single-node-installation-psu-patch/">
+            <time datetime="2020-03-08T17:25:31.025Z" itemprop="datePublished">2020-03-09</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/raw/writing/source/_posts/database/oracle-12c-single-node-installation-psu-patch.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/edit/writing/source/_posts/database/oracle-12c-single-node-installation-psu-patch.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/commits/writing/source/_posts/database/oracle-12c-single-node-installation-psu-patch.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Oracle 12c单节点RAC安装PSU补丁程序
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <h5 id="描述：单节点RAC，数据库版本12-2-0-1"><a href="#描述：单节点RAC，数据库版本12-2-0-1" class="headerlink" title="描述：单节点RAC，数据库版本12.2.0.1"></a>描述：单节点RAC，数据库版本12.2.0.1</h5><p>下载最新OPatch，补丁编号6880880,升级Grid和OracleHome的OPatch</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升级Grid的OPatch</span></span><br><span class="line">[root@auxsbdb12c grid]<span class="comment"># mv OPatch/ OPatch.bak</span></span><br><span class="line">[root@auxsbdb12c home]<span class="comment"># cp -r OPatch/ /u01/app/12.2.0/grid/</span></span><br><span class="line">[root@auxsbdb12c grid]<span class="comment"># chown -R grid:oinstall OPatch</span></span><br><span class="line">[grid@auxsbdb12c ~]$ opatch version</span><br><span class="line">OPatch Version: 12.2.0.1.18</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级OracleHome的OPatch</span></span><br><span class="line">[oracle@auxsbdb12c dbhome_1]$ mv OPatch/ OPatch.bak</span><br><span class="line">[root@auxsbdb12c home]<span class="comment"># cp -r OPatch/ /u01/app/oracle/product/12.2.0/dbhome_1/</span></span><br><span class="line">[root@auxsbdb12c dbhome_1]<span class="comment"># chown -R oracle:oinstall OPatch</span></span><br><span class="line">[root@auxsbdb12c dbhome_1]<span class="comment"># cd OPatch</span></span><br><span class="line">[root@auxsbdb12c OPatch]<span class="comment"># ./opatch version</span></span><br><span class="line">OPatch Version: 12.2.0.1.18</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>补丁冲突检测（视情况而定，需要配置OPath的环境变量）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">[grid@auxsbdb12c ~]$ opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /home/29708720/29757449</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">PREREQ session</span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_12-23-32PM_1.log</span><br><span class="line"></span><br><span class="line">Invoking prereq <span class="string">"checkconflictagainstohwithdetail"</span></span><br><span class="line"></span><br><span class="line">Prereq <span class="string">"checkConflictAgainstOHWithDetail"</span> passed.</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br><span class="line">[grid@auxsbdb12c ~]$ opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /home/29708720/26839277/</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">PREREQ session</span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_12-24-38PM_1.log</span><br><span class="line"></span><br><span class="line">Invoking prereq <span class="string">"checkconflictagainstohwithdetail"</span></span><br><span class="line"></span><br><span class="line">Prereq <span class="string">"checkConflictAgainstOHWithDetail"</span> passed.</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br><span class="line">[grid@auxsbdb12c ~]$ opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /home/29708720/28566910/</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">PREREQ session</span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_12-24-45PM_1.log</span><br><span class="line"></span><br><span class="line">Invoking prereq <span class="string">"checkconflictagainstohwithdetail"</span></span><br><span class="line"></span><br><span class="line">Prereq <span class="string">"checkConflictAgainstOHWithDetail"</span> passed.</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br><span class="line">[grid@auxsbdb12c ~]$ opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /home/29708720/29770040/</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">PREREQ session</span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_12-24-55PM_1.log</span><br><span class="line"></span><br><span class="line">Invoking prereq <span class="string">"checkconflictagainstohwithdetail"</span></span><br><span class="line"></span><br><span class="line">Prereq <span class="string">"checkConflictAgainstOHWithDetail"</span> passed.</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br><span class="line">[grid@auxsbdb12c ~]$ opatch prereq CheckConflictAgainstOHWithDetail -phBaseDir /home/29708720/29770090/</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">PREREQ session</span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_12-25-00PM_1.log</span><br><span class="line"></span><br><span class="line">Invoking prereq <span class="string">"checkconflictagainstohwithdetail"</span></span><br><span class="line"></span><br><span class="line">Prereq <span class="string">"checkConflictAgainstOHWithDetail"</span> passed.</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>系统空间检测（视情况而定）</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[grid@auxsbdb12c ~]$ vi /tmp/patch_list_gihome.txt</span><br><span class="line"></span><br><span class="line">[grid@auxsbdb12c ~]$ cat /tmp/patch_list_gihome.txt</span><br><span class="line">/home/29708720/29757449</span><br><span class="line">/home/29708720/29770040</span><br><span class="line">/home/29708720/29770090</span><br><span class="line">/home/29708720/26839277</span><br><span class="line">/home/29708720/28566910</span><br><span class="line"></span><br><span class="line">[grid@auxsbdb12c ~]$ opatch prereq CheckSystemSpace -phBaseFile /tmp/patch_list_gihome.txt</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line">PREREQ session</span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_12-31-29PM_1.log</span><br><span class="line"></span><br><span class="line">Invoking prereq <span class="string">"checksystemspace"</span></span><br><span class="line"></span><br><span class="line">Prereq <span class="string">"checkSystemSpace"</span> passed.</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>设置root用户环境变量，使用opathcauto来自动安装补丁集</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@auxsbdb12c ~]<span class="comment"># export PATH=$PATH:/u01/app/12.2.0/grid/OPatch</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>安装补丁，有bug，文档编号：2336186.1</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@auxsbdb12c ~]<span class="comment"># opatchauto apply /home/29708720/</span></span><br><span class="line"></span><br><span class="line">OPatchauto session is initiated at Sat Nov 30 12:45:23 2019</span><br><span class="line"></span><br><span class="line">System initialization <span class="built_in">log</span> file is /u01/app/12.2.0/grid/cfgtoollogs/opatchautodb/systemconfig2019-11-30_12-45-26PM.log.</span><br><span class="line"></span><br><span class="line">Session <span class="built_in">log</span> file is /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/opatchauto2019-11-30_12-45-30PM.log</span><br><span class="line">The id <span class="keyword">for</span> this session is HRWY</span><br><span class="line">OPATCHAUTO-72141: Grid patching cannot be performed <span class="keyword">in</span> rolling mode.</span><br><span class="line">OPATCHAUTO-72141: Grid is installed only on a single node.</span><br><span class="line">OPATCHAUTO-72141: Execute opatchauto <span class="keyword">in</span> non-rolling mode.</span><br><span class="line">OPatchAuto failed.</span><br><span class="line"></span><br><span class="line">OPatchauto session completed at Sat Nov 30 12:45:42 2019</span><br><span class="line">Time taken to complete the session 0 minute, 19 seconds</span><br><span class="line"></span><br><span class="line">opatchauto failed with error code 42</span><br></pre></td></tr></table></figure>
+
+
+
+<p>-nonrolling 模式安装补丁</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">[root@auxsbdb12c ~]<span class="comment"># opatchauto apply /home/29708720/ -nonrolling</span></span><br><span class="line"></span><br><span class="line">OPatchauto session is initiated at Sat Nov 30 13:06:32 2019</span><br><span class="line"></span><br><span class="line">System initialization <span class="built_in">log</span> file is /u01/app/12.2.0/grid/cfgtoollogs/opatchautodb/systemconfig2019-11-30_01-06-35PM.log.</span><br><span class="line"></span><br><span class="line">Session <span class="built_in">log</span> file is /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/opatchauto2019-11-30_01-06-41PM.log</span><br><span class="line">The id <span class="keyword">for</span> this session is NIHR</span><br><span class="line"></span><br><span class="line">Executing OPatch prereq operations to verify patch applicability on home /u01/app/12.2.0/grid</span><br><span class="line">Patch applicability verified successfully on home /u01/app/12.2.0/grid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Bringing down CRS service on home /u01/app/12.2.0/grid</span><br><span class="line">Prepatch operation <span class="built_in">log</span> file location: /u01/app/grid/crsdata/auxsbdb12c/crsconfig/crspatch_auxsbdb12c_2019-11-30_01-07-11PM.log</span><br><span class="line">CRS service brought down successfully on home /u01/app/12.2.0/grid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Start applying binary patch on home /u01/app/12.2.0/grid</span><br><span class="line">Binary patch applied successfully on home /u01/app/12.2.0/grid</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Starting CRS service on home /u01/app/12.2.0/grid</span><br><span class="line">Postpatch operation <span class="built_in">log</span> file location: /u01/app/grid/crsdata/auxsbdb12c/crsconfig/crspatch_auxsbdb12c_2019-11-30_01-10-53PM.log</span><br><span class="line">CRS service started successfully on home /u01/app/12.2.0/grid</span><br><span class="line"></span><br><span class="line">OPatchAuto successful.</span><br><span class="line"></span><br><span class="line">--------------------------------Summary--------------------------------</span><br><span class="line"></span><br><span class="line">Patching is completed successfully. Please find the summary as follows:</span><br><span class="line"></span><br><span class="line">Host:auxsbdb12c</span><br><span class="line">CRS Home:/u01/app/12.2.0/grid</span><br><span class="line">Version:12.2.0.1.0</span><br><span class="line">Summary:</span><br><span class="line"></span><br><span class="line">==Following patches were SUCCESSFULLY applied:</span><br><span class="line"></span><br><span class="line">Patch: /home/29708720/26839277</span><br><span class="line">Log: /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/core/opatch/opatch2019-11-30_13-08-23PM_1.log</span><br><span class="line"></span><br><span class="line">Patch: /home/29708720/28566910</span><br><span class="line">Log: /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/core/opatch/opatch2019-11-30_13-08-23PM_1.log</span><br><span class="line"></span><br><span class="line">Patch: /home/29708720/29757449</span><br><span class="line">Log: /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/core/opatch/opatch2019-11-30_13-08-23PM_1.log</span><br><span class="line"></span><br><span class="line">Patch: /home/29708720/29770040</span><br><span class="line">Log: /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/core/opatch/opatch2019-11-30_13-08-23PM_1.log</span><br><span class="line"></span><br><span class="line">Patch: /home/29708720/29770090</span><br><span class="line">Log: /u01/app/12.2.0/grid/cfgtoollogs/opatchauto/core/opatch/opatch2019-11-30_13-08-23PM_1.log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">OPatchauto session completed at Sat Nov 30 13:14:42 2019</span><br><span class="line">Time taken to complete the session 8 minutes, 10 seconds</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查看补丁信息</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">[grid@auxsbdb12c ~]$ opatch lsinventory</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Oracle Home       : /u01/app/12.2.0/grid</span><br><span class="line">Central Inventory : /u01/app/oraInventory</span><br><span class="line">   from           : /u01/app/12.2.0/grid/oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/opatch2019-11-30_13-16-12PM_1.log</span><br><span class="line"></span><br><span class="line">Lsinventory Output file location : /u01/app/12.2.0/grid/cfgtoollogs/opatch/lsinv/lsinventory2019-11-30_13-16-12PM.txt</span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Local Machine Information::</span><br><span class="line">Hostname: auxsbdb12c</span><br><span class="line">ARU platform id: 226</span><br><span class="line">ARU platform description:: Linux x86-64</span><br><span class="line"></span><br><span class="line">Installed Top-level Products (1):</span><br><span class="line"></span><br><span class="line">Oracle Grid Infrastructure 12c                                       12.2.0.1.0</span><br><span class="line">There are 1 products installed <span class="keyword">in</span> this Oracle Home.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Interim patches (5) :</span><br><span class="line"></span><br><span class="line">Patch  29770090     : applied on Sat Nov 30 13:10:51 CST 2019</span><br><span class="line">Unique Patch ID:  22918814</span><br><span class="line">Patch description:  <span class="string">"ACFS JUL 2019 RELEASE UPDATE 12.2.0.1.190716 (29770090)"</span></span><br><span class="line">   Created on 10 Jun 2019, 15:42:50 hrs PST8PDT</span><br><span class="line">   Bugs fixed:</span><br><span class="line">     21129279, 22591010, 23059642, 23152694, 23181299, 23625427, 24285969</span><br><span class="line">     ...</span><br><span class="line"></span><br><span class="line">Patch  29770040     : applied on Sat Nov 30 13:10:08 CST 2019</span><br><span class="line">Unique Patch ID:  22917824</span><br><span class="line">Patch description:  <span class="string">"OCW JUL 2019 RELEASE UPDATE 12.2.0.1.190716 (29770040)"</span></span><br><span class="line">   Created on 19 Jun 2019, 13:36:44 hrs PST8PDT</span><br><span class="line">   Bugs fixed:</span><br><span class="line">     12816839, 13250991, 18701017, 20559126, 20674742, 21477269, 21679331</span><br><span class="line">     ...</span><br><span class="line"></span><br><span class="line">Patch  29757449     : applied on Sat Nov 30 13:09:20 CST 2019</span><br><span class="line">Unique Patch ID:  23009673</span><br><span class="line">Patch description:  <span class="string">"Database Jul 2019 Release Update : 12.2.0.1.190716 (29757449)"</span></span><br><span class="line">   Created on 9 Jul 2019, 21:38:38 hrs PST8PDT</span><br><span class="line">   Bugs fixed:</span><br><span class="line">     8480838, 8932139, 12763598, 13554903, 14221306, 14690846, 15931756</span><br><span class="line">     ...</span><br><span class="line"></span><br><span class="line">Patch  28566910     : applied on Sat Nov 30 13:08:39 CST 2019</span><br><span class="line">Unique Patch ID:  22413436</span><br><span class="line">Patch description:  <span class="string">"TOMCAT RELEASE UPDATE 12.2.0.1.0(ID:180802.1448.S) (28566910)"</span></span><br><span class="line">   Created on 28 Aug 2018, 23:01:25 hrs PST8PDT</span><br><span class="line">   Bugs fixed:</span><br><span class="line">     25728967, 26934551, 28402313</span><br><span class="line"></span><br><span class="line">Patch  26839277     : applied on Sat Nov 30 13:08:32 CST 2019</span><br><span class="line">Unique Patch ID:  21578760</span><br><span class="line">Patch description:  <span class="string">"DBWLM RELEASE UPDATE 12.2.0.1.0(ID:170913) (26839277)"</span></span><br><span class="line">   Created on 21 Sep 2017, 03:13:10 hrs PST8PDT</span><br><span class="line">   Bugs fixed:</span><br><span class="line">     26584906</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">OPatch succeeded.</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注：如果在安装的补丁的时候数据库已经建好了，在给Grid安装补丁的时候，会把数据库的补丁一起安装上，如果只是安装了Grid和数据库软件就开始安装补丁的话，数据库需要单独安装补丁。给数据库安装补丁需要先关闭数据库，如果出现<strong><em>Prerequisite check “CheckActiveFilesAndExecutables” failed</em></strong>需要关闭数据库以及清理进程。</p>
+<p>设置oracle用户环境变量，给数据库安装补丁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line">[oracle@auxsbdb12c 29757449]$ opatch apply</span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Oracle Home       : &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1</span><br><span class="line">Central Inventory : &#x2F;u01&#x2F;app&#x2F;oraInventory</span><br><span class="line">   from           : &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#x2F;oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#x2F;cfgtoollogs&#x2F;opatch&#x2F;opatch2019-11-30_15-17-14PM_1.log</span><br><span class="line"></span><br><span class="line">Verifying environment and performing prerequisite checks...</span><br><span class="line"></span><br><span class="line">--------------------------------------------------------------------------------</span><br><span class="line">Start OOP by Prereq process.</span><br><span class="line">Launch OOP...</span><br><span class="line"></span><br><span class="line">Oracle Interim Patch Installer version 12.2.0.1.18</span><br><span class="line">Copyright (c) 2019, Oracle Corporation.  All rights reserved.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Oracle Home       : &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1</span><br><span class="line">Central Inventory : &#x2F;u01&#x2F;app&#x2F;oraInventory</span><br><span class="line">   from           : &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#x2F;oraInst.loc</span><br><span class="line">OPatch version    : 12.2.0.1.18</span><br><span class="line">OUI version       : 12.2.0.1.4</span><br><span class="line">Log file location : &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#x2F;cfgtoollogs&#x2F;opatch&#x2F;opatch2019-11-30_15-17-26PM_1.log</span><br><span class="line"></span><br><span class="line">Verifying environment and performing prerequisite checks...</span><br><span class="line">OPatch continues with these patches:   29757449  </span><br><span class="line"></span><br><span class="line">Do you want to proceed? [y|n]</span><br><span class="line">Y (auto-answered by -silent)</span><br><span class="line">User Responded with: Y</span><br><span class="line">All checks passed.</span><br><span class="line"></span><br><span class="line">Please shutdown Oracle instances running out of this ORACLE_HOME on the local system.</span><br><span class="line">(Oracle Home &#x3D; &#39;&#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#39;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is the local system ready for patching? [y|n]</span><br><span class="line">Y (auto-answered by -silent)</span><br><span class="line">User Responded with: Y</span><br><span class="line">Backing up files...</span><br><span class="line">Applying interim patch &#39;29757449&#39; to OH &#39;&#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#39;</span><br><span class="line">ApplySession: Optional component(s) [ oracle.has.crs, 12.2.0.1.0 ] , [ oracle.ons.daemon, 12.2.0.1.0 ] , [ oracle.oid.client, 12.2.0.1.0 ] , [ oracle.network.cman, 12.2.0.1.0 ] , [ oracle.jdk, 1.8.0.211.12 ]  not present in the Oracle Home or a higher version is found.</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.network.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.util, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ctx, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ctx.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ldap.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.dbscripts, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.rsf.ic, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.sdo, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.sdo.locator, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.tfa, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.xdk.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.rman, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.assistants.deconfig, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.xdk, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.precomp.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.sqlplus, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.assistants.acf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ldap.rsf.ic, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.oci, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.dv, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.crs, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.install.plugins, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.oraolap, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.install.deinstalltool, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.oracore.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.xdk.parser.java, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.sqlplus.ic, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ldap.client, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.nlsrtl.rsf, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.lbac, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.assistants.server, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ons, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.rdbms.deconfig, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.precomp.common, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.precomp.lang, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">Patching component oracle.ctx.atg, 12.2.0.1.0...</span><br><span class="line"></span><br><span class="line">OPatch found the word &quot;error&quot; in the stderr of the make command.</span><br><span class="line">Please look at this stderr. You can re-run this make command.</span><br><span class="line">Stderr output:</span><br><span class="line">chmod: changing permissions of &#96;&#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#x2F;bin&#x2F;extjobO&#39;: Operation not permitted</span><br><span class="line">make: [iextjob] Error 1 (ignored)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Patch 29757449 successfully applied.</span><br><span class="line">OPatch Session completed with warnings.</span><br><span class="line">Log file location: &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;product&#x2F;12.2.0&#x2F;dbhome_1&#x2F;cfgtoollogs&#x2F;opatch&#x2F;opatch2019-11-30_15-17-26PM_1.log</span><br><span class="line"></span><br><span class="line">OPatch completed with warnings.</span><br><span class="line"></span><br><span class="line">error可以安全忽略，文档编号：2265726.1</span><br></pre></td></tr></table></figure>
+
+
+
+<p>开启数据库，运行datapatch</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[oracle@auxsbdb12c 29757449]$ ./datapatch -verbose</span><br><span class="line">-bash: ./datapatch: No such file or directory</span><br><span class="line">[oracle@auxsbdb12c 29757449]$ datapatch -verbose</span><br><span class="line">SQL Patching tool version 12.2.0.1.0 Production on Sat Nov 30 16:09:35 2019</span><br><span class="line">Copyright (c) 2012, 2019, Oracle.  All rights reserved.</span><br><span class="line"></span><br><span class="line">Log file <span class="keyword">for</span> this invocation: /u01/app/oracle/cfgtoollogs/sqlpatch/sqlpatch_11189_2019_11_30_16_09_35/sqlpatch_invocation.log</span><br><span class="line"></span><br><span class="line">Connecting to database...OK</span><br><span class="line">Note:  Datapatch will only apply or rollback SQL fixes <span class="keyword">for</span> PDBs</span><br><span class="line">       that are <span class="keyword">in</span> an open state, no patches will be applied to closed PDBs.</span><br><span class="line">       Please refer to Note: Datapatch: Database 12c Post Patch SQL Automation</span><br><span class="line">       (Doc ID 1585822.1)</span><br><span class="line">Bootstrapping registry and package to current versions...done</span><br><span class="line">Determining current state...done</span><br><span class="line"></span><br><span class="line">Current state of SQL patches:</span><br><span class="line">Bundle series DBRU:</span><br><span class="line">  ID 190716 <span class="keyword">in</span> the binary registry and not installed <span class="keyword">in</span> any PDB</span><br><span class="line"></span><br><span class="line">Adding patches to installation queue and performing prereq checks...</span><br><span class="line">Installation queue:</span><br><span class="line">  For the following PDBs: CDB<span class="variable">$ROOT</span> PDB<span class="variable">$SEED</span> PDB1</span><br><span class="line">    Nothing to roll back</span><br><span class="line">    The following patches will be applied:</span><br><span class="line">      29757449 (DATABASE JUL 2019 RELEASE UPDATE 12.2.0.1.190716)</span><br><span class="line"></span><br><span class="line">Installing patches...</span><br><span class="line">Patch installation complete.  Total patches installed: 3</span><br><span class="line"></span><br><span class="line">Validating logfiles...</span><br><span class="line">Patch 29757449 apply (pdb CDB<span class="variable">$ROOT</span>): SUCCESS</span><br><span class="line">  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/29757449/23009673/29757449_apply_AUXDB_CDBROOT_2019Nov30_16_10_07.log (no errors)</span><br><span class="line">Patch 29757449 apply (pdb PDB<span class="variable">$SEED</span>): SUCCESS</span><br><span class="line">  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/29757449/23009673/29757449_apply_AUXDB_PDBSEED_2019Nov30_16_11_38.log (no errors)</span><br><span class="line">Patch 29757449 apply (pdb PDB1): SUCCESS</span><br><span class="line">  logfile: /u01/app/oracle/cfgtoollogs/sqlpatch/29757449/23009673/29757449_apply_AUXDB_PDB1_2019Nov30_16_11_38.log (no errors)</span><br><span class="line">SQL Patching tool complete on Sat Nov 30 16:14:16 2019</span><br></pre></td></tr></table></figure>
+
+
+
+<p>编译无效对象</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[oracle@auxsbdb12c 29757449]$ sqlplus /nolog</span><br><span class="line"></span><br><span class="line">SQL*Plus: Release 12.2.0.1.0 Production on Sat Nov 30 16:15:58 2019</span><br><span class="line"></span><br><span class="line">Copyright (c) 1982, 2016, Oracle.  All rights reserved.</span><br><span class="line"></span><br><span class="line">SQL&gt; conn / as sysdba</span><br><span class="line">Connected.</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt; @?/rdbms/admin/utlrp</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2020/03/09/database/ora-01804-failure-to-initialize-timezone-information/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    ORA-01804 failure to initialize timezone information
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Felix &copy; 2021 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
