@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>PGA_AGGREGATE_TARGET specified is high | RmVsaXg</title>
+    
+    
+        <meta name="keywords" content="ORA-00700" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="启动数据库出现PGA_AGGREGATE_TARGET specified is high  1234PGA_AGGREGATE_TARGET specified is highErrors in file &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;diag&#x2F;rdbms&#x2F;shdb551&#x2F;shdb551&#x2F;trace&#x2F;shdb551_ora_9494.trc  (incident&#x3D;122887):ORA-00">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PGA_AGGREGATE_TARGET specified is high">
+<meta property="og:url" content="http://falkon.cn/2021/01/27/database/pga_aggregate_target-specified-is-high/index.html">
+<meta property="og:site_name" content="RmVsaXg">
+<meta property="og:description" content="启动数据库出现PGA_AGGREGATE_TARGET specified is high  1234PGA_AGGREGATE_TARGET specified is highErrors in file &#x2F;u01&#x2F;app&#x2F;oracle&#x2F;diag&#x2F;rdbms&#x2F;shdb551&#x2F;shdb551&#x2F;trace&#x2F;shdb551_ora_9494.trc  (incident&#x3D;122887):ORA-00">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-27T09:37:22.679Z">
+<meta property="article:modified_time" content="2021-01-27T03:10:51.078Z">
+<meta property="article:author" content="Felix">
+<meta property="article:tag" content="ORA-00700">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="RmVsaXg" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="http://q6p62toq8.falkon.cn/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">RmVsaXg</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/zabbix50-add-chinese-language/">Zabbix5.0添加中文</a></li>  <li class="file"><a href="/2021/01/27/linux/zabbix50-compile-installation/">Zabbix 5.0 编译安装</a></li>  <li class="file"><a href="/2021/01/27/linux/zabbix50-server-is-not-running/">ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/centos8-mini-installed-then-install-desktop/">CentOS 8 Mini installed then installation Desktop</a></li>  <li class="file"><a href="/2021/01/27/linux/linux-create-zombie-processes-and-killed/">Linux下创建模拟僵尸进程并杀死</a></li>  <li class="file"><a href="/2021/01/27/linux/linux-extend-swap/">Linux扩展swap分区</a></li>  <li class="file"><a href="/2021/01/27/linux/linux78-config-vncserver/">Linux 7.8安装配置VNCSERVER</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/mysql57-installation-for-centos78/">MySQL5.7在CentOS7.8平台上的部署</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            NAS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/openfiler-installation-and-configuration/">Openfiler安装配置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/asm-req_mir_free_mb-test/">ASM中的Req_mir_free_MB实验</a></li>  <li class="file"><a href="/2021/01/27/database/exp-imp/">Oracle 导入导出工具的基本使用</a></li>  <li class="file"><a href="/2021/01/27/database/expdp-impdp/">Oracle 数据泵的基本使用</a></li>  <li class="file"><a href="/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/">ORA-00600 内部错误代码 参数 [4511]</a></li>  <li class="file"><a href="/2021/01/27/database/ora-00980-synonym-translation-is-no-longer-valid/">ORA-00980 synonym translation is no longer valid</a></li>  <li class="file"><a href="/2021/01/27/database/ora-01804-failure-to-initialize-timezone-information/">ORA-01804 failure to initialize timezone information</a></li>  <li class="file"><a href="/2021/01/27/database/ora-28000-the-account-is-locked/">ORA-28000 the account is locked</a></li>  <li class="file"><a href="/2021/01/27/database/ora-65500-could-not-modify-db_unique_name-resource-exists/">ORA-65500 could not modify DB_UNIQUE_NAME, resource exists</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-cloud-depoly-and-local-silent-installation/">Oracle 12c 云上部署和本地静默安装</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-pdb-clone/">Oracle 12c PDB克隆</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-single-node-installation-psu-patch/">Oracle 12c单节点RAC安装PSU补丁程序</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-varchar2-extended/">Oracle 12c varchar2字段长度扩展</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-asm-lun-size/">Oracle ASM LUN Size</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-audit-files-delete-test/">Oracle Audit目录中文件的内容以及是否可以删除</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-dcd/">Oracle DCD详解</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-flex-asm-advantages-and-disadvantages/">深入了解Oracle Flex ASM及其优点</a></li>  <li class="file"><a href="/2021/01/27/database/patch-30830913-apply-with%20errors/">Oracle 19.5 Patch 30830913 apply (pdb CDB$ROOT) WITH ERRORS</a></li>  <li class="file active"><a href="/2021/01/27/database/pga_aggregate_target-specified-is-high/">PGA_AGGREGATE_TARGET specified is high</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g-ogg/">Linux Installation Oracle11g GoldenGate</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g-rac/">Linux Installation 11g RAC</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g/">Linux Installation Oracle 11g</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle12c-rac/">Linux Installation Oracle 12c RAC</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle12c/">Linux Installation Oracle 12c</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Database Appliance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Enterprise Manager Cloud Control
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/emcc134-oracle-management-server-could-not-be-started/">EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</a></li>  <li class="file"><a href="/2021/01/27/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">The plug-in BI Publisher Configuration has failed its perform method</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            SQL Server
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/sqlserver-2019-installation-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-database/pga_aggregate_target-specified-is-high" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ORA-00700/" rel="tag">ORA-00700</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/01/27/database/pga_aggregate_target-specified-is-high/">
+            <time datetime="2021-01-27T09:37:22.679Z" itemprop="datePublished">2021-01-27</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/raw/writing/source/_posts/database/pga_aggregate_target-specified-is-high.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/edit/writing/source/_posts/database/pga_aggregate_target-specified-is-high.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/felix/rmvsaxg/commits/writing/source/_posts/database/pga_aggregate_target-specified-is-high.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            PGA_AGGREGATE_TARGET specified is high
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <ul>
+<li>启动数据库出现PGA_AGGREGATE_TARGET specified is high</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PGA_AGGREGATE_TARGET specified is high</span><br><span class="line">Errors <span class="keyword">in</span> file /u01/app/oracle/diag/rdbms/shdb551/shdb551/trace/shdb551_ora_9494.trc  (incident=122887):</span><br><span class="line">ORA-00700: soft internal error, arguments: [pga physmem <span class="built_in">limit</span>], [12752781312], [10969017344], [], [], [], [], [], [], [], [], []</span><br><span class="line">Incident details <span class="keyword">in</span>: /u01/app/oracle/diag/rdbms/shdb551/shdb551/incident/incdir_122887/shdb551_ora_9494_i122887.trc</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<ul>
+<li>查看trace信息,发现是PGA设置过大导致错误</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[root@sfcpid1 ~]<span class="comment"># more /u01/app/oracle/diag/rdbms/sfcpid1/sfcpid1/incident/incdir_163849/sfcpid1_ora_20259_i163849.trc</span></span><br><span class="line">Dump file /u01/app/oracle/diag/rdbms/sfcpid1/sfcpid1/incident/incdir_163849/sfcpid1_ora_20259_i163849.trc</span><br><span class="line">Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production</span><br><span class="line">Version 19.5.2.0.0</span><br><span class="line">Build label:    RDBMS_19.3.0.0.0DBRU_LINUX.X64_190417</span><br><span class="line">ORACLE_HOME:    /u01/app/oracle/product/19.0.0/dbhome_1</span><br><span class="line">System name:    Linux</span><br><span class="line">Node name:      sfcpid1</span><br><span class="line">Release:        3.10.0-1127.el7.x86_64</span><br><span class="line">Version:        <span class="comment">#1 SMP Tue Feb 18 16:39:12 EST 2020</span></span><br><span class="line">Machine:        x86_64</span><br><span class="line">Instance name: sfcpid1</span><br><span class="line">Redo thread mounted by this instance: 0 &lt;none&gt;</span><br><span class="line">Oracle process number: 0</span><br><span class="line">Unix process pid: 20259, image: </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*** 2020-08-24T16:15:36.805587+08:00</span><br><span class="line">[TOC00000]</span><br><span class="line">Jump to table of contents</span><br><span class="line">Dump continued from file: /u01/app/oracle/diag/rdbms/sfcpid1/sfcpid1/trace/sfcpid1_ora_20259.trc</span><br><span class="line">[TOC00001]</span><br><span class="line">ORA-00700: soft internal error, arguments: [pga physmem <span class="built_in">limit</span>], [12752781312], [10969017344], [], [], [], [], [], [], [], [], []</span><br><span class="line"></span><br><span class="line">[TOC00001-END]</span><br><span class="line">[TOC00002]</span><br><span class="line">========= Dump <span class="keyword">for</span> incident 163849 (ORA 700 [pga physmem <span class="built_in">limit</span>]) ========</span><br><span class="line">[TOC00003]</span><br><span class="line">----- Beginning of Customized Incident Dump(s) -----</span><br><span class="line"> </span><br><span class="line">WARNING: PGA_AGGREGATE_TARGET (12162 MB) is too high <span class="keyword">for</span></span><br><span class="line">         the amount of physical memory (63921 MB) and</span><br><span class="line">         SGA size (36608 MB) - it should be less than 10460 MB.</span><br><span class="line"> </span><br><span class="line">----- End of Customized Incident Dump(s) -----</span><br><span class="line">[TOC00003-END]</span><br><span class="line"></span><br><span class="line">*** 2020-08-24T16:15:36.828334+08:00</span><br><span class="line">dbkedDefDump(): Starting incident default dumps (flags=0x2, level=3, mask=0x0)</span><br><span class="line">[TOC00004]</span><br><span class="line">----- SQL Statement (None) -----</span><br><span class="line">Current SQL information unavailable - no session.</span><br><span class="line">[TOC00004-END]</span><br><span class="line"></span><br><span class="line">[TOC00005]</span><br><span class="line">----- Call Stack Trace -----</span><br><span class="line">calling              call     entry                argument values <span class="keyword">in</span> hex      </span><br><span class="line">location             <span class="built_in">type</span>     point                (? means dubious value)     </span><br><span class="line">-------------------- -------- -------------------- ----------------------------</span><br><span class="line">ksedst1()+95         call     kgdsdst()            7FFEFD089840 000000002</span><br><span class="line">                                                   7FFEFD083B70 ? 7FFEFD083C88 ?</span><br><span class="line">                                                   000000000 000000082 ?</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>根据trace信息里给出的建议值修改PGA</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter system set pga_aggregate_target=10460M scope=spfile;</span><br><span class="line"></span><br><span class="line">System altered.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改完成后重启数据库，发现错误已经消失</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/01/27/database/rhel-install-oracle11g-ogg/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Linux Installation Oracle11g GoldenGate
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/01/27/database/patch-30830913-apply-with%20errors/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Oracle 19.5 Patch 30830913 apply (pdb CDB$ROOT) WITH ERRORS</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Felix &copy; 2021 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
