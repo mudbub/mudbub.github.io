@@ -6,7 +6,7 @@
   <link href="http://falkon.cn/atom.xml" rel="self"/>
   
   <link href="http://falkon.cn/"/>
-  <updated>2021-02-20T15:23:50.938Z</updated>
+  <updated>2021-02-21T03:32:31.274Z</updated>
   <id>http://falkon.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在Docker中备份MySQL，备份文件中没有数据</title>
+    <link href="http://falkon.cn/2021/02/21/linux/backup-in-the-docker-dumpfile-0/"/>
+    <id>http://falkon.cn/2021/02/21/linux/backup-in-the-docker-dumpfile-0/</id>
+    <published>2021-02-20T16:46:34.382Z</published>
+    <updated>2021-02-21T03:32:31.274Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Docker中使用脚本备份MySQL的时候出现一个奇怪的问题，产生的备份文件大小都为零，没有任何数据。但是手动执行脚本文件时候，备份文件中数据是完整的。</p><ul><li>备份脚本如下</li></ul><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># cat backup-mysql-redmine.sh </span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">bak_dir=<span class="string">"/backups/mysql-redmine"</span></span><br><span class="line">bak_time=`date +%Y%m%d-%H-%M-%S`</span><br><span class="line">docker <span class="built_in">exec</span> -it c51994799113 mysqldump -uroot -proot redmine &gt; <span class="variable">$bak_dir</span>/redmine-<span class="variable">$bak_time</span>.sql</span><br></pre></td></tr></table></figure><ul><li>计划任务如下</li></ul><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># crontab -l</span></span><br><span class="line">*/5 * * * * /root/backup-mysql-redmine.sh</span><br></pre></td></tr></table></figure><ul><li>crontab产生备份文件如下</li></ul><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host mysql-redmine]<span class="comment"># ll</span></span><br><span class="line">total 0</span><br><span class="line">-rw-r--r--. 1 root root 0 Feb 21 00:45 redmine-20210221-00-45-01.sql</span><br><span class="line">-rw-r--r--. 1 root root 0 Feb 21 00:50 redmine-20210221-00-50-01.sql</span><br><span class="line">You have new mail <span class="keyword">in</span> /var/spool/mail/root</span><br></pre></td></tr></table></figure><ul><li>系统产生的邮件内容</li></ul><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">You have new mail <span class="keyword">in</span> /var/spool/mail/root</span><br><span class="line">[root@docker-host mysql-redmine]<span class="comment"># </span></span><br><span class="line">[root@docker-host mysql-redmine]<span class="comment"># </span></span><br><span class="line">[root@docker-host mysql-redmine]<span class="comment"># more /var/spool/mail/root </span></span><br><span class="line">From root@docker-host.localdomain  Sat Feb 20 21:55:01 2021</span><br><span class="line">Return-Path: &lt;root@docker-host.localdomain&gt;</span><br><span class="line">X-Original-To: root</span><br><span class="line">Delivered-To: root@docker-host.localdomain</span><br><span class="line">Received: by docker-host.localdomain (Postfix, from userid 0)</span><br><span class="line">id D3D0E619B686; Sat, 20 Feb 2021 21:55:01 +0800 (CST)</span><br><span class="line">From: <span class="string">"(Cron Daemon)"</span> &lt;root@docker-host.localdomain&gt;</span><br><span class="line">To: root@docker-host.localdomain</span><br><span class="line">Subject: Cron &lt;root@docker-host&gt; /root/backup-mysql-redmine.sh</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Auto-Submitted: auto-generated</span><br><span class="line">Precedence: bulk</span><br><span class="line">X-Cron-Env: &lt;XDG_SESSION_ID=6&gt;</span><br><span class="line">X-Cron-Env: &lt;XDG_RUNTIME_DIR=/run/user/0&gt;</span><br><span class="line">X-Cron-Env: &lt;LANG=en_US.UTF-8&gt;</span><br><span class="line">X-Cron-Env: &lt;SHELL=/bin/sh&gt;</span><br><span class="line">X-Cron-Env: &lt;HOME=/root&gt;</span><br><span class="line">X-Cron-Env: &lt;PATH=/usr/bin:/bin&gt;</span><br><span class="line">X-Cron-Env: &lt;LOGNAME=root&gt;</span><br><span class="line">X-Cron-Env: &lt;USER=root&gt;</span><br><span class="line">Message-Id: &lt;20210220135501.D3D0E619B686@docker-host.localdomain&gt;</span><br><span class="line">Date: Sat, 20 Feb 2021 21:55:01 +0800 (CST)</span><br><span class="line"></span><br><span class="line">the input device is not a TTY</span><br></pre></td></tr></table></figure><ul><li><p>分析<br>上面的备份命令中从mysqldump之后的命令我们是理解的，跟正常的MySQL的备份使用是一致的，那么问题应该出现在<code>docker exec -it c51994799113</code>这半条命令里面，首先<code>docker exec</code>根据官网的描述是：Run a command in a running container，意思是说在容器中运行命令，那么排除了这条命令出现问题的可能。其次<code>c51994799113</code>这个只是MySQL的容器ID，那么问题应该就出现在<code>-it</code>这个参数上了，执行<code>docker exec --help</code>来查看命令的帮助： </p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># docker exec --help</span></span><br><span class="line"></span><br><span class="line">Usage:  docker <span class="built_in">exec</span> [OPTIONS] CONTAINER COMMAND [ARG...]</span><br><span class="line"></span><br><span class="line">Run a <span class="built_in">command</span> <span class="keyword">in</span> a running container</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -d, --detach               Detached mode: run <span class="built_in">command</span> <span class="keyword">in</span> the background</span><br><span class="line">      --detach-keys string   Override the key sequence <span class="keyword">for</span> detaching a container</span><br><span class="line">  -e, --env list             Set environment variables</span><br><span class="line">      --env-file list        Read <span class="keyword">in</span> a file of environment variables</span><br><span class="line">  -i, --interactive          Keep STDIN open even <span class="keyword">if</span> not attached</span><br><span class="line">      --privileged           Give extended privileges to the <span class="built_in">command</span></span><br><span class="line">  -t, --tty                  Allocate a pseudo-TTY</span><br><span class="line">  -u, --user string          Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])</span><br><span class="line">  -w, --workdir string       Working directory inside the container</span><br></pre></td></tr></table></figure><p>在帮助中找到tty相关，描述为分配一个伪tty终端。</p></li><li><p>总结<br>TTY是终端设备的统称，来源于Teletypes，或者teletypewriters。the input device is not a TTY 这句话的意思是：<br>后台Linux执行的时候不是终端设备。一般在docker里执行命令的时候都喜欢加上<code>-it</code>这个参数，这个参数表示终端设备，所以<br>Docker执行后台任务或者程序时去掉<code>-it</code>这个参数就可以了。</p></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;在Docker中使用脚本备份MySQL的时候出现一个奇怪的问题，产生的备份文件大小都为零，没有任何数据。但是手动执行脚本文件时候，备份文件中数据是完整的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;备份脚本如下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight sh&quot;</summary>
+      
+    
+    
+    
+    <category term="Linux" scheme="http://falkon.cn/categories/Linux/"/>
+    
+    
+    <category term="Docker" scheme="http://falkon.cn/tags/Docker/"/>
+    
+    <category term="MySQL" scheme="http://falkon.cn/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>Centos 7.9 安装 Docker</title>
@@ -508,31 +538,6 @@
     <category term="19g" scheme="http://falkon.cn/tags/19g/"/>
     
     <category term="Flex" scheme="http://falkon.cn/tags/Flex/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Oracle DCD详解</title>
-    <link href="http://falkon.cn/2021/01/27/database/oracle-dcd/"/>
-    <id>http://falkon.cn/2021/01/27/database/oracle-dcd/</id>
-    <published>2021-01-27T09:37:22.662Z</published>
-    <updated>2021-01-27T03:08:51.173Z</updated>
-    
-    <content type="html"><![CDATA[<p>Oracle DCD详解</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Oracle DCD详解&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="Oracle" scheme="http://falkon.cn/categories/Oracle/"/>
-    
-    
-    <category term="DCD" scheme="http://falkon.cn/tags/DCD/"/>
     
   </entry>
   
