@@ -9,15 +9,15 @@
         <meta name="keywords" content="Linux,Zombie" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="在Linux下模拟创建僵尸进程，并通过查找僵尸进程并杀死僵尸进程的过程。  创建僵尸进程  123456789101112131415161718192021222324252627282930#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;unistd.h&gt;#include &lt;signal.h&gt;#inc">
+    <meta name="description" content="僵尸进程是当子进程比父进程先结束，而父进程又没有回收子进程，释放子进程占用的资源，此时子进程将成为一个僵尸进程。如果父进程先退出，子进程被init接管，子进程退出后init会回收其占用的相关资源。我们都知道进程的工作原理。我们启动一个程序，开始我们的任务，然后等任务结束了，我们就停止这个进程。进程停止后，该进程就会从进程表中移除。下面通过一个示例，在Linux下模拟创建僵尸进程，并通过查找僵尸进程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下创建模拟僵尸进程并杀死">
 <meta property="og:url" content="http://falkon.cn/2021/01/27/linux/linux-create-zombie-processes-and-killed/index.html">
 <meta property="og:site_name" content="RmVsaXg">
-<meta property="og:description" content="在Linux下模拟创建僵尸进程，并通过查找僵尸进程并杀死僵尸进程的过程。  创建僵尸进程  123456789101112131415161718192021222324252627282930#include &lt;stdio.h&gt;#include &lt;stdlib.h&gt;#include &lt;unistd.h&gt;#include &lt;signal.h&gt;#inc">
+<meta property="og:description" content="僵尸进程是当子进程比父进程先结束，而父进程又没有回收子进程，释放子进程占用的资源，此时子进程将成为一个僵尸进程。如果父进程先退出，子进程被init接管，子进程退出后init会回收其占用的相关资源。我们都知道进程的工作原理。我们启动一个程序，开始我们的任务，然后等任务结束了，我们就停止这个进程。进程停止后，该进程就会从进程表中移除。下面通过一个示例，在Linux下模拟创建僵尸进程，并通过查找僵尸进程">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-27T09:37:22.740Z">
-<meta property="article:modified_time" content="2021-02-21T03:36:46.201Z">
+<meta property="article:modified_time" content="2021-02-21T03:43:18.722Z">
 <meta property="article:author" content="Felix">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Zombie">
@@ -383,7 +383,7 @@
             
         
         
-            <p>在Linux下模拟创建僵尸进程，并通过查找僵尸进程并杀死僵尸进程的过程。</p>
+            <p>僵尸进程是当子进程比父进程先结束，而父进程又没有回收子进程，释放子进程占用的资源，此时子进程将成为一个僵尸进程。如果父进程先退出，子进程被init接管，子进程退出后init会回收其占用的相关资源。我们都知道进程的工作原理。我们启动一个程序，开始我们的任务，然后等任务结束了，我们就停止这个进程。进程停止后，该进程就会从进程表中移除。下面通过一个示例，在Linux下模拟创建僵尸进程，并通过查找僵尸进程并杀死僵尸进程的过程。</p>
 <ul>
 <li>创建僵尸进程</li>
 </ul>
