@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>WARNING too many parse errors | MUDBUB.COM</title>
+    
+    
+        <meta name="keywords" content="Parse" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="客户数据库巡检的过程中发现大量的WARNING: too many parse errors，客户的数据库版本为12.2.0.1，从12.2开始，当解析失败超过一定的次数，alert日志会记录相关信息，以便对解析失败的语句进行排查  通过查询MOS，_kks_parse_error_warning参数控制相关记录，默认是每100次解析失败便会写入alert日志。  查看参数默认值   123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WARNING too many parse errors">
+<meta property="og:url" content="http://mudbub.com/2021/03/22/database/warning-too-many-parse-errors/index.html">
+<meta property="og:site_name" content="MUDBUB.COM">
+<meta property="og:description" content="客户数据库巡检的过程中发现大量的WARNING: too many parse errors，客户的数据库版本为12.2.0.1，从12.2开始，当解析失败超过一定的次数，alert日志会记录相关信息，以便对解析失败的语句进行排查  通过查询MOS，_kks_parse_error_warning参数控制相关记录，默认是每100次解析失败便会写入alert日志。  查看参数默认值   123456">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-22T05:12:25.735Z">
+<meta property="article:modified_time" content="2021-04-20T06:46:46.748Z">
+<meta property="article:author" content="Falkon">
+<meta property="article:tag" content="Parse">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="MUDBUB.COM" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="http://qnlcbj437.mudbub.com/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">MUDBUB.COM</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/zabbix50-add-chinese-language/">Zabbix5.0添加中文</a></li>  <li class="file"><a href="/2021/01/27/linux/zabbix50-compile-installation/">Zabbix 5.0 编译安装</a></li>  <li class="file"><a href="/2021/01/27/linux/zabbix50-server-is-not-running/">ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/centos8-mini-installed-then-install-desktop/">CentOS 8 Mini installed then installation Desktop</a></li>  <li class="file"><a href="/2021/01/27/linux/linux-create-zombie-processes-and-killed/">Linux下创建模拟僵尸进程并杀死</a></li>  <li class="file"><a href="/2021/01/27/linux/linux-extend-swap/">Linux扩展swap分区</a></li>  <li class="file"><a href="/2021/01/27/linux/linux78-config-vncserver/">Linux 7.8安装配置VNCSERVER</a></li>  <li class="file"><a href="/2021/02/20/linux/docker-installation-for-centos79/">CentOS 7.9 安装 Docker</a></li>  <li class="file"><a href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/">在Docker中备份MySQL，备份文件中没有数据</a></li>  <li class="file"><a href="/2021/02/22/linux/crontab-time-format-explain-in-detail/">Linux crontab工作定义详解</a></li>  <li class="file"><a href="/2021/04/12/linux/alua-port-group-messages/">ALUA port group messages</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/mysql57-installation-for-centos78/">MySQL5.7在CentOS7.8平台上的部署</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            NAS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/openfiler-installation-and-configuration/">Openfiler安装配置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/asm-req_mir_free_mb-test/">ASM中的Req_mir_free_MB实验</a></li>  <li class="file"><a href="/2021/01/27/database/exp-imp/">Oracle 导入导出工具的基本使用</a></li>  <li class="file"><a href="/2021/01/27/database/expdp-impdp/">Oracle 数据泵的基本使用</a></li>  <li class="file"><a href="/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/">ORA-00600 内部错误代码 参数 [4511]</a></li>  <li class="file"><a href="/2021/01/27/database/ora-00980-synonym-translation-is-no-longer-valid/">ORA-00980 synonym translation is no longer valid</a></li>  <li class="file"><a href="/2021/01/27/database/ora-01804-failure-to-initialize-timezone-information/">ORA-01804 failure to initialize timezone information</a></li>  <li class="file"><a href="/2021/01/27/database/ora-28000-the-account-is-locked/">ORA-28000 the account is locked</a></li>  <li class="file"><a href="/2021/01/27/database/ora-65500-could-not-modify-db_unique_name-resource-exists/">ORA-65500 could not modify DB_UNIQUE_NAME, resource exists</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-cloud-depoly-and-local-silent-installation/">Oracle 12c 云上部署和本地静默安装</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-pdb-clone/">Oracle 12c PDB克隆</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-single-node-installation-psu-patch/">Oracle 12c单节点RAC安装PSU补丁程序</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-varchar2-extended/">Oracle 12c varchar2字段长度扩展</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-asm-lun-size/">Oracle ASM LUN Size</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-audit-files-delete-test/">Oracle Audit目录中文件的内容以及是否可以删除</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-dcd/">Oracle DCD详解</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-flex-asm-advantages-and-disadvantages/">深入了解Oracle Flex ASM及其优点</a></li>  <li class="file"><a href="/2021/01/27/database/patch-30830913-apply-with%20errors/">Oracle 19.5 Patch 30830913 apply (pdb CDB$ROOT) WITH ERRORS</a></li>  <li class="file"><a href="/2021/01/27/database/pga_aggregate_target-specified-is-high/">PGA_AGGREGATE_TARGET specified is high</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g-ogg/">Linux Installation Oracle11g GoldenGate</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g-rac/">Linux Installation 11g RAC</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g/">Linux Installation Oracle 11g</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle12c-rac/">Linux Installation Oracle 12c RAC</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle12c/">Linux Installation Oracle 12c</a></li>  <li class="file active"><a href="/2021/03/22/database/warning-too-many-parse-errors/">WARNING too many parse errors</a></li>  <li class="file"><a href="/2021/03/26/database/oracle-database-misoperation-recovery/">Oracle常见误操作数据恢复</a></li>  <li class="file"><a href="/2021/03/26/database/oda-x8-2-ha-nvme-raid/">ODA X8-2 HA RAID模式错误处理</a></li>  <li class="file"><a href="/2021/03/31/database/oracle-rename-sys/">等保2.0要求Oracle重命名SYS</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Database Appliance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Enterprise Manager Cloud Control
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/emcc134-oracle-management-server-could-not-be-started/">EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</a></li>  <li class="file"><a href="/2021/01/27/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">The plug-in BI Publisher Configuration has failed its perform method</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            SQL Server
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
+                    </li> 
+                     <li class="file"><a href="/2021/04/22/linux/ssh-limit-ip-login/">linux/ssh-limit-ip-login</a></li>  </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-database/warning-too-many-parse-errors" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Parse/" rel="tag">Parse</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/03/22/database/warning-too-many-parse-errors/">
+            <time datetime="2021-03-22T05:12:25.735Z" itemprop="datePublished">2021-03-22</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/warning-too-many-parse-errors.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/warning-too-many-parse-errors.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/warning-too-many-parse-errors.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            WARNING too many parse errors
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>客户数据库巡检的过程中发现大量的WARNING: too many parse errors，客户的数据库版本为12.2.0.1，从12.2开始，当解析失败超过一定的次数，alert日志会记录相关信息，以便对解析失败的语句进行排查</p>
+<ul>
+<li><p>通过查询MOS，<code>_kks_parse_error_warning</code>参数控制相关记录，默认是每100次解析失败便会写入alert日志。</p>
+</li>
+<li><p>查看参数默认值</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; set linesize 200</span><br><span class="line">SQL&gt; col name for a52  </span><br><span class="line">SQL&gt; col value for a24</span><br><span class="line">SQL&gt; col description for a50</span><br><span class="line">SQL&gt; </span><br><span class="line">SQL&gt; </span><br><span class="line">SQL&gt; select a.ksppinm name,b.ksppstvl value,a.ksppdesc description</span><br><span class="line">  from x$ksppi a,x$ksppcv b</span><br><span class="line"> where a.inst_id = USERENV ('Instance')</span><br><span class="line">   and b.inst_id = USERENV ('Instance')</span><br><span class="line">   and a.indx = b.indx</span><br><span class="line">   and upper(a.ksppinm) like upper('%&amp;param%') order by name;  2    3    4    5    6  </span><br><span class="line">Enter value for param: _kks_parse_error_warning</span><br><span class="line">old   6:    and upper(a.ksppinm) like upper('%&amp;param%') order by name</span><br><span class="line">new   6:    and upper(a.ksppinm) like upper('%_kks_parse_error_warning%') order by name</span><br><span class="line"></span><br><span class="line">NAME					   VALUE		    DESCRIPTION</span><br><span class="line"><span class="comment">-------------------------- ---------------- --------------------------------------------------</span></span><br><span class="line">_kks_parse_error_warning   100			    Parse error warning</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为了重现这个错误，将这个默认参数修改为1</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter system set "_kks_parse_error_warning"=1;</span><br><span class="line"></span><br><span class="line">System altered.</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>分别在CDB和PDB中执行一条错误的查询语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from t1;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t1</span><br><span class="line">              *</span><br><span class="line"><span class="keyword">ERROR</span> <span class="keyword">at</span> line <span class="number">1</span>:</span><br><span class="line">ORA<span class="number">-00942</span>: <span class="keyword">table</span> <span class="keyword">or</span> <span class="keyword">view</span> does <span class="keyword">not</span> exist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SQL</span>&gt; <span class="keyword">alter</span> <span class="keyword">session</span> <span class="keyword">set</span> <span class="keyword">container</span>=pdb1;</span><br><span class="line"></span><br><span class="line">Session altered.</span><br><span class="line"></span><br><span class="line">SQL&gt; select * from t2;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t2</span><br><span class="line">              *</span><br><span class="line"><span class="keyword">ERROR</span> <span class="keyword">at</span> line <span class="number">1</span>:</span><br><span class="line">ORA<span class="number">-00942</span>: <span class="keyword">table</span> <span class="keyword">or</span> <span class="keyword">view</span> does <span class="keyword">not</span> exist</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>观察测试日志信息</p>
+</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Thread 1 advanced to log sequence 101 (LGWR switch),  current SCN: 14562135</span><br><span class="line">  Current log<span class="comment"># 1 seq# 101 mem# 0: +DATA/GRASDT/ONLINELOG/group_1.270.1061811373</span></span><br><span class="line">  Current log<span class="comment"># 1 seq# 101 mem# 1: +RECO/GRASDT/ONLINELOG/group_1.260.1061811377</span></span><br><span class="line">2021-03-22T04:05:52.735099+08:00</span><br><span class="line">ARC1 (PID:14385): Archived Log entry 149 added for T-1.S-100 ID 0xc81485a7 LAD:1</span><br><span class="line">2021-03-22T12:41:20.018404+08:00</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">SYSTEM</span> <span class="keyword">SET</span> _kks_parse_error_warning=<span class="number">1</span> <span class="keyword">SCOPE</span>=<span class="keyword">BOTH</span>;</span><br><span class="line">2021-03-22T12:41:58.818554+08:00</span><br><span class="line">WARNING: too many parse errors, count=1 SQL hash=0x85dd68f7             &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><br><span class="line">PARSE ERROR: ospid=24715, error=942 for statement: </span><br><span class="line">2021-03-22T12:41:58.819084+08:00</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> t1</span><br><span class="line">Additional information: hd=<span class="number">0x85c676a8</span> phd=<span class="number">0xa9e0e438</span> flg=<span class="number">0x28</span> cisid=<span class="number">0</span> <span class="keyword">sid</span>=<span class="number">0</span> ciuid=<span class="number">0</span> uid=<span class="number">0</span> sqlid=<span class="number">27</span>uhu2q2xuu7r</span><br><span class="line">...Current username=<span class="keyword">SYS</span></span><br><span class="line">...Application: sqlplus@db-<span class="keyword">oracle</span><span class="number">-193</span>-grasdt01 (TNS V1-V3) <span class="keyword">Action</span>: </span><br><span class="line"><span class="number">2021</span><span class="number">-03</span><span class="number">-22</span>T12:<span class="number">43</span>:<span class="number">10.832224</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">PDB1(<span class="number">3</span>):<span class="keyword">WARNING</span>: too many <span class="keyword">parse</span> <span class="keyword">errors</span>, <span class="keyword">count</span>=<span class="number">1</span> <span class="keyword">SQL</span> <span class="keyword">hash</span>=<span class="number">0x4895f57f</span>     &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><br><span class="line">PDB1(<span class="number">3</span>):<span class="keyword">PARSE</span> <span class="keyword">ERROR</span>: ospid=<span class="number">24715</span>, <span class="keyword">error</span>=<span class="number">942</span> <span class="keyword">for</span> <span class="keyword">statement</span>: </span><br><span class="line"><span class="number">2021</span><span class="number">-03</span><span class="number">-22</span>T12:<span class="number">43</span>:<span class="number">10.832785</span>+<span class="number">08</span>:<span class="number">00</span></span><br><span class="line">PDB1(<span class="number">3</span>):<span class="keyword">select</span> * <span class="keyword">from</span> t2</span><br><span class="line">PDB1(<span class="number">3</span>):Additional information: hd=<span class="number">0xb4706f70</span> phd=<span class="number">0x9ba64de0</span> flg=<span class="number">0x28</span> cisid=<span class="number">0</span> <span class="keyword">sid</span>=<span class="number">0</span> ciuid=<span class="number">0</span> uid=<span class="number">0</span> sqlid=<span class="number">741</span>xfy549bxbz</span><br><span class="line">PDB1(<span class="number">3</span>):...Current username=<span class="keyword">SYS</span></span><br><span class="line">PDB1(<span class="number">3</span>):...Application: sqlplus@db-<span class="keyword">oracle</span><span class="number">-193</span>-grasdt01 (TNS V1-V3) <span class="keyword">Action</span>:</span><br></pre></td></tr></table></figure>
+<ul>
+<li>总结<br>根据以上测试，发现_kks_parse_error_warning这个参数控制着解析失败后达到参数设置的值，在alert日志中出现<code>WARNING: too many parse errors</code>，<br>可以通过设置<code>_kks_parse_error_warning</code>参数的值为0来规避alert日志的告警信息，但一般不建议这么错，最好是根据日志中的提示，找到相应的语句进行修改。确保这条语句是正确合法的。</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+        <a href="/2021/03/26/database/oracle-database-misoperation-recovery/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Oracle常见误操作数据恢复
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2021/02/22/linux/crontab-time-format-explain-in-detail/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Linux crontab工作定义详解</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Falkon &copy; 2021 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
