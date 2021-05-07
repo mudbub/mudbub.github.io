@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Alter database move datafile | MUDBUB.COM</title>
+    
+    
+        <meta name="keywords" content="Datafile" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在我们日常工作中，会经常发现客户的数据库因为应用方操作问题导致数据文件没有建立在正确的位置上，在数据库意外关闭后，发现某个节点无法启动，无法启动的节点报ORA-01157、ORA-01110的错误，在12.2以前的版本我们需要将表空间offline后进行移动，或者删除后重建，后者会造成数据的丢失。在12.2以后的版本中Oracle提供了可以在线移动数据文件的操作，很大方便了DBA的日常工作，下面演">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Alter database move datafile">
+<meta property="og:url" content="http://mudbub.com/2021/05/07/database/alter-database-move-datafile-to/index.html">
+<meta property="og:site_name" content="MUDBUB.COM">
+<meta property="og:description" content="在我们日常工作中，会经常发现客户的数据库因为应用方操作问题导致数据文件没有建立在正确的位置上，在数据库意外关闭后，发现某个节点无法启动，无法启动的节点报ORA-01157、ORA-01110的错误，在12.2以前的版本我们需要将表空间offline后进行移动，或者删除后重建，后者会造成数据的丢失。在12.2以后的版本中Oracle提供了可以在线移动数据文件的操作，很大方便了DBA的日常工作，下面演">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-07T02:03:27.903Z">
+<meta property="article:modified_time" content="2021-05-07T07:40:23.490Z">
+<meta property="article:author" content="Falkon">
+<meta property="article:tag" content="Datafile">
+<meta name="twitter:card" content="summary">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="MUDBUB.COM" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="http://qnlcbj437.mudbub.com/favicon.png" />
+    
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+    
+<link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    
+<script src="/libs/jquery/plugins/cookie/1.4.1/jquery.cookie.js"></script>
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+
+    
+    
+        
+<link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+
+    
+    
+    
+    
+
+
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">MUDBUB.COM</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap" id='categories'>
+        <h3 class="widget-title">
+            <span>categories</span>
+            &nbsp;
+            <a id='allExpand' href="#">
+                <i class="fa fa-angle-double-down fa-2x"></i>
+            </a>
+        </h3>
+        
+        
+        
+         <ul class="unstyled" id="tree" > 
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            DevOps
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/zabbix50-add-chinese-language/">Zabbix5.0添加中文</a></li>  <li class="file"><a href="/2021/01/27/linux/zabbix50-compile-installation/">Zabbix 5.0 编译安装</a></li>  <li class="file"><a href="/2021/01/27/linux/zabbix50-server-is-not-running/">ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Linux
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/centos8-mini-installed-then-install-desktop/">CentOS 8 Mini installed then installation Desktop</a></li>  <li class="file"><a href="/2021/01/27/linux/linux-create-zombie-processes-and-killed/">Linux下创建模拟僵尸进程并杀死</a></li>  <li class="file"><a href="/2021/01/27/linux/linux-extend-swap/">Linux扩展swap分区</a></li>  <li class="file"><a href="/2021/01/27/linux/linux78-config-vncserver/">Linux 7.8安装配置VNCSERVER</a></li>  <li class="file"><a href="/2021/02/20/linux/docker-installation-for-centos79/">CentOS 7.9 安装 Docker</a></li>  <li class="file"><a href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/">在Docker中备份MySQL，备份文件中没有数据</a></li>  <li class="file"><a href="/2021/02/22/linux/crontab-time-format-explain-in-detail/">Linux crontab工作定义详解</a></li>  <li class="file"><a href="/2021/04/12/linux/alua-port-group-messages/">ALUA port group messages</a></li>  <li class="file"><a href="/2021/04/22/linux/ssh-limit-ip-login/">Linux SSH限制IP登录</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            MySQL
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/mysql57-installation-for-centos78/">MySQL5.7在CentOS7.8平台上的部署</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            NAS
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/linux/openfiler-installation-and-configuration/">Openfiler安装配置</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory open">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder-open"></i>
+                            &nbsp;
+                            Oracle
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/asm-req_mir_free_mb-test/">ASM中的Req_mir_free_MB实验</a></li>  <li class="file"><a href="/2021/01/27/database/exp-imp/">Oracle 导入导出工具的基本使用</a></li>  <li class="file"><a href="/2021/01/27/database/expdp-impdp/">Oracle 数据泵的基本使用</a></li>  <li class="file"><a href="/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/">ORA-00600 内部错误代码 参数 [4511]</a></li>  <li class="file"><a href="/2021/01/27/database/ora-00980-synonym-translation-is-no-longer-valid/">ORA-00980 synonym translation is no longer valid</a></li>  <li class="file"><a href="/2021/01/27/database/ora-01804-failure-to-initialize-timezone-information/">ORA-01804 failure to initialize timezone information</a></li>  <li class="file"><a href="/2021/01/27/database/ora-28000-the-account-is-locked/">ORA-28000 the account is locked</a></li>  <li class="file"><a href="/2021/01/27/database/ora-65500-could-not-modify-db_unique_name-resource-exists/">ORA-65500 could not modify DB_UNIQUE_NAME, resource exists</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-cloud-depoly-and-local-silent-installation/">Oracle 12c 云上部署和本地静默安装</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-pdb-clone/">Oracle 12c PDB克隆</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-single-node-installation-psu-patch/">Oracle 12c单节点RAC安装PSU补丁程序</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-12c-varchar2-extended/">Oracle 12c varchar2字段长度扩展</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-asm-lun-size/">Oracle ASM LUN Size</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-audit-files-delete-test/">Oracle Audit目录中文件的内容以及是否可以删除</a></li>  <li class="file"><a href="/2021/01/27/database/oracle-flex-asm-advantages-and-disadvantages/">深入了解Oracle Flex ASM及其优点</a></li>  <li class="file"><a href="/2021/01/27/database/patch-30830913-apply-with%20errors/">Oracle 19.5 Patch 30830913 apply (pdb CDB$ROOT) WITH ERRORS</a></li>  <li class="file"><a href="/2021/01/27/database/pga_aggregate_target-specified-is-high/">PGA_AGGREGATE_TARGET specified is high</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g-ogg/">Linux Installation Oracle11g GoldenGate</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g-rac/">Linux Installation 11g RAC</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle11g/">Linux Installation Oracle 11g</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle12c-rac/">Linux Installation Oracle 12c RAC</a></li>  <li class="file"><a href="/2021/01/27/database/rhel-install-oracle12c/">Linux Installation Oracle 12c</a></li>  <li class="file"><a href="/2021/03/22/database/warning-too-many-parse-errors/">WARNING too many parse errors</a></li>  <li class="file"><a href="/2021/03/26/database/oracle-database-misoperation-recovery/">Oracle常见误操作数据恢复</a></li>  <li class="file"><a href="/2021/03/26/database/oda-x8-2-ha-nvme-raid/">ODA X8-2 HA RAID模式错误处理</a></li>  <li class="file"><a href="/2021/03/31/database/oracle-rename-sys/">Rname SYS</a></li>  <li class="file active"><a href="/2021/05/07/database/alter-database-move-datafile-to/">Alter database move datafile</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Database Appliance
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            Oracle Enterprise Manager Cloud Control
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/emcc134-oracle-management-server-could-not-be-started/">EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</a></li>  <li class="file"><a href="/2021/01/27/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">The plug-in BI Publisher Configuration has failed its perform method</a></li>  </ul> 
+                    </li> 
+                    
+                    <li class="directory">
+                        <a href="#" data-role="directory">
+                            <i class="fa fa-folder"></i>
+                            &nbsp;
+                            SQL Server
+                        </a>
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
+                    </li> 
+                     </ul> 
+    </div>
+    <script>
+        $(document).ready(function() {
+            var iconFolderOpenClass  = 'fa-folder-open';
+            var iconFolderCloseClass = 'fa-folder';
+            var iconAllExpandClass = 'fa-angle-double-down';
+            var iconAllPackClass = 'fa-angle-double-up';
+            // Handle directory-tree expansion:
+            // 左键单独展开目录
+            $(document).on('click', '#categories a[data-role="directory"]', function (event) {
+                event.preventDefault();
+
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var subtree = $(this).siblings('ul');
+                icon.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if (expanded) {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideUp({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderCloseClass);
+                } else {
+                    if (typeof subtree != 'undefined') {
+                        subtree.slideDown({ duration: 100 });
+                    }
+                    icon.addClass(iconFolderOpenClass);
+                }
+            });
+            // 右键展开下属所有目录
+            $('#categories a[data-role="directory"]').bind("contextmenu", function(event){
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconFolderOpenClass);
+                var listNode = $(this).siblings('ul');
+                var subtrees = $.merge(listNode.find('li ul'), listNode);
+                var icons = $.merge(listNode.find('.fa'), icon);
+                icons.removeClass(iconFolderOpenClass).removeClass(iconFolderCloseClass);
+                if(expanded) {
+                    subtrees.slideUp({ duration: 100 });
+                    icons.addClass(iconFolderCloseClass);
+                } else {
+                    subtrees.slideDown({ duration: 100 });
+                    icons.addClass(iconFolderOpenClass);
+                }
+            })
+            // 展开关闭所有目录按钮
+            $(document).on('click', '#allExpand', function (event) {
+                event.preventDefault();
+                
+                var icon = $(this).children('.fa');
+                var expanded = icon.hasClass(iconAllExpandClass);
+                icon.removeClass(iconAllExpandClass).removeClass(iconAllPackClass);
+                if(expanded) {
+                    $('#sidebar .fa.fa-folder').removeClass('fa-folder').addClass('fa-folder-open')
+                    $('#categories li ul').slideDown({ duration: 100 });
+                    icon.addClass(iconAllPackClass);
+                } else {
+                    $('#sidebar .fa.fa-folder-open').removeClass('fa-folder-open').addClass('fa-folder')
+                    $('#categories li ul').slideUp({ duration: 100 });
+                    icon.addClass(iconAllExpandClass);
+                }
+            });  
+        });
+    </script>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+            <section id="main"><article id="post-database/alter-database-move-datafile-to" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Datafile/" rel="tag">Datafile</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/05/07/database/alter-database-move-datafile-to/">
+            <time datetime="2021-05-07T02:03:27.903Z" itemprop="datePublished">2021-05-07</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/alter-database-move-datafile-to.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/alter-database-move-datafile-to.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/alter-database-move-datafile-to.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Alter database move datafile
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+        
+        
+            <p>在我们日常工作中，会经常发现客户的数据库因为应用方操作问题导致数据文件没有建立在正确的位置上，在数据库意外关闭后，发现某个节点无法启动，无法启动的节点报ORA-01157、ORA-01110的错误，在12.2以前的版本我们需要将表空间offline后进行移动，或者删除后重建，后者会造成数据的丢失。在12.2以后的版本中Oracle提供了可以在线移动数据文件的操作，很大方便了DBA的日常工作，下面演示了19c CDB数据库中PDB1的数据文件路径创建错误的境况下，如何在线移动数据文件。</p>
+<ul>
+<li>查看现有的数据文件</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; show pdbs</span><br><span class="line"></span><br><span class="line">    CON_ID CON_NAME                       OPEN MODE  RESTRICTED</span><br><span class="line"><span class="comment">---------- ------------------------------ ---------- ----------</span></span><br><span class="line">         2 PDB$SEED                       READ ONLY  NO</span><br><span class="line">         3 PDB1                           READ WRITE NO</span><br><span class="line">         4 TESTPDB                        READ WRITE NO</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt; alter session set container=pdb1;</span><br><span class="line"></span><br><span class="line">Session altered.</span><br><span class="line"></span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt; select file_name from dba_data_files;</span><br><span class="line"></span><br><span class="line">FILE_NAME</span><br><span class="line"><span class="comment">--------------------------------------------------------------------------------</span></span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/system.277.1061813623</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/sysaux.278.1061813625</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/undotbs1.276.1061813623</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/undo_2.280.1061813739</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/users.281.1061813771</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/helloworld.287.1062002667</span><br><span class="line"></span><br><span class="line">6 rows selected.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>模拟数据文件路径创建错误</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; create tablespace test01 datafile '/u01/app/oracle/product/19.0.0.0/dbhome_1/dbs/test01.dbf' size 1m;</span><br><span class="line"></span><br><span class="line">Tablespace created.</span><br><span class="line"></span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt; select file_name from dba_data_files;</span><br><span class="line"></span><br><span class="line">FILE_NAME</span><br><span class="line"><span class="comment">--------------------------------------------------------------------------------</span></span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/system.277.1061813623</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/sysaux.278.1061813625</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/undotbs1.276.1061813623</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/undo_2.280.1061813739</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/users.281.1061813771</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/helloworld.287.1062002667</span><br><span class="line">/u01/app/oracle/product/19.0.0.0/dbhome_1/dbs/test01.dbf</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>节点1和节点2关闭PDB后重启</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; show pdbs</span><br><span class="line"></span><br><span class="line">    CON_ID CON_NAME                       OPEN MODE  RESTRICTED</span><br><span class="line"><span class="comment">---------- ------------------------------ ---------- ----------</span></span><br><span class="line">         2 PDB$SEED                       READ ONLY  NO</span><br><span class="line">         3 PDB1                           MOUNTED</span><br><span class="line">         4 TESTPDB                        READ WRITE NO</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt; alter pluggable database pdb1 open;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">pluggable</span> <span class="keyword">database</span> pdb1 <span class="keyword">open</span></span><br><span class="line">*</span><br><span class="line"><span class="keyword">ERROR</span> <span class="keyword">at</span> line <span class="number">1</span>:</span><br><span class="line">ORA<span class="number">-01157</span>: cannot identify/<span class="keyword">lock</span> <span class="keyword">data</span> <span class="keyword">file</span> <span class="number">25</span> - see DBWR <span class="keyword">trace</span> <span class="keyword">file</span></span><br><span class="line">ORA<span class="number">-01110</span>: <span class="keyword">data</span> <span class="keyword">file</span> <span class="number">25</span>:</span><br><span class="line"><span class="string">'/u01/app/oracle/product/19.0.0.0/dbhome_1/dbs/test01.dbf'</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在节点1移动数据文件到正确路径</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter database move datafile '/u01/app/oracle/product/19.0.0.0/dbhome_1/dbs/test01.dbf' to '+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/test01.dbf';</span><br><span class="line"></span><br><span class="line">Database altered.</span><br><span class="line"></span><br><span class="line">SQL&gt;</span><br><span class="line">SQL&gt; select file_name from dba_data_files;</span><br><span class="line"></span><br><span class="line">FILE_NAME</span><br><span class="line"><span class="comment">--------------------------------------------------------------------------------</span></span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/system.277.1061813623</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/sysaux.278.1061813625</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/undotbs1.276.1061813623</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/undo_2.280.1061813739</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/users.281.1061813771</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/helloworld.287.1062002667</span><br><span class="line">+DATA/GRASDT/B8D57AF9DAF32B4DE0532FFB0A0AB52F/DATAFILE/test01.dbf</span><br><span class="line"></span><br><span class="line">7 rows selected.</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>再次启动节点2的PDB<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter pluggable database pdb1 open;</span><br><span class="line"></span><br><span class="line">Pluggable database altered.</span><br><span class="line"></span><br><span class="line">SQL&gt; show pdbs</span><br><span class="line"></span><br><span class="line">    CON_ID CON_NAME                       OPEN MODE  RESTRICTED</span><br><span class="line"><span class="comment">---------- ------------------------------ ---------- ----------</span></span><br><span class="line">         2 PDB$SEED                       READ ONLY  NO</span><br><span class="line">         3 PDB1                           READ WRITE NO</span><br><span class="line">         4 TESTPDB                        READ WRITE NO</span><br><span class="line">SQL&gt;</span><br></pre></td></tr></table></figure></li>
+<li>在数据文件移动到正确的位置后，PDB已经可以正常启动</li>
+</ul>
+
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+    
+<nav id="article-nav">
+    
+    
+        <a href="/2021/04/22/linux/ssh-limit-ip-login/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Linux SSH限制IP登录</div>
+        </a>
+    
+</nav>
+
+
+
+
+
+    
+    
+
+
+
+
+<!-- baidu url auto push script -->
+<script type="text/javascript">
+    !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=window.location.href,o=document.referrer;if(!e.test(r)){var n="//api.share.baidu.com/s.gif";o?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var t=new Image;t.src=n}}(window);
+</script>     
+</section>
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            Falkon &copy; 2021 
+            <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank"><img alt="Creative Commons License" style="border-width:0" src="https://licensebuttons.net/l/by-nc-nd/4.0/80x15.png" /></a>
+            <br> Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme - <a href="https://github.com/zthxxx/hexo-theme-Wikitten" target="_blank" rel="noopener">wikitten</a>
+            
+                <br>
+                <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+                &nbsp;|&nbsp;
+                <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> <span id="busuanzi_value_site_uv"></span></span>
+            
+        </div>
+    </div>
+</footer>
+
+        
+
+    
+        
+<script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-share.min.js"></script>
+
+        
+<script src="/libs/lightgallery/js/lg-video.min.js"></script>
+
+    
+    
+        
+<script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+    
+    
+        <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true,
+            TeX: {
+                equationNumbers: {
+                  autoNumber: 'AMS'
+                }
+            }
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+    </div>
+</body>
+</html>
