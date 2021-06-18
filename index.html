@@ -225,7 +225,7 @@
                             &nbsp;
                             Oracle Database Appliance
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  <li class="file"><a href="/2021/06/18/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found/">Error getting repository data for ol6_x86_64_userspace_ksplice, repository not found</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -245,7 +245,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/2021/05/14/database/oda-v1/">database/oda-v1</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -317,6 +317,181 @@
 </aside>
             
             <section id="main">
+        <article id="post-linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle-Database-Appliance/">Oracle Database Appliance</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Ksplice/" rel="tag">Ksplice</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/06/18/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found/">
+            <time datetime="2021-06-18T01:33:37.540Z" itemprop="datePublished">2021-06-18</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2021/06/18/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found/">Error getting repository data for ol6_x86_64_userspace_ksplice, repository not found</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><ul>
+<li>ODA（Oracle Database Appliance）在OAK 18.6以上的版本，每个半小时回在xxx邮件中提示一个错误<code>Error getting repository data for ol6_x86_64_userspace_ksplice, repository not found</code>,具体邮件内容如下：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">From root@valdb01.oracle.com  Wed Jun 16 19:09:02 2021</span><br><span class="line">Return-Path: &lt;root@valdb01.oracle.com&gt;</span><br><span class="line">Received: from valdb01.oracle.com (localhost [127.0.0.1])</span><br><span class="line">        by valdb01.oracle.com (8.14.7/8.14.7) with ESMTP id 15GB92da008414</span><br><span class="line">        for &lt;root@valdb01.oracle.com&gt;; Wed, 16 Jun 2021 19:09:02 +0800</span><br><span class="line">Received: (from root@localhost)</span><br><span class="line">        by valdb01.oracle.com (8.14.7/8.14.7/Submit) id 15GB924p008263;</span><br><span class="line">        Wed, 16 Jun 2021 19:09:02 +0800</span><br><span class="line">Date: Wed, 16 Jun 2021 19:09:02 +0800</span><br><span class="line">Message-Id: &lt;202106161109.15GB924p008263@valdb01.oracle.com&gt;</span><br><span class="line">From: "(Cron Daemon)" &lt;root@valdb01.oracle.com&gt;</span><br><span class="line">To: root@valdb01.oracle.com</span><br><span class="line">Subject: Cron &lt;root@valdb01&gt; export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin &amp;&amp; [ -x /usr/bin/ksplice ] &amp;&amp; (/usr/bin/ksplice --cron user upgra</span><br><span class="line">de; /usr/bin/ksplice --cron xen upgrade)</span><br><span class="line">Content-Type: text/plain; charset=UTF-8</span><br><span class="line">Auto-Submitted: auto-generated</span><br><span class="line">Precedence: bulk</span><br><span class="line">X-Cron-Env: &lt;XDG_SESSION_ID=91&gt;</span><br><span class="line">X-Cron-Env: &lt;XDG_RUNTIME_DIR=/run/user/0&gt;</span><br><span class="line">X-Cron-Env: &lt;LANG=en_US.UTF-8&gt;</span><br><span class="line">X-Cron-Env: &lt;SHELL=/bin/sh&gt;</span><br><span class="line">X-Cron-Env: &lt;HOME=/root&gt;</span><br><span class="line">X-Cron-Env: &lt;PATH=/usr/bin:/bin&gt;</span><br><span class="line">X-Cron-Env: &lt;LOGNAME=root&gt;</span><br><span class="line">X-Cron-Env: &lt;USER=root&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Error getting repository data for ol7_x86_64_userspace_ksplice, repository not found</span><br></pre></td></tr></table></figure>
+
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2021/06/18/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-database/oda-v1" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+                        
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/05/14/database/oda-v1/">
+            <time datetime="2021-05-14T00:58:57.186Z" itemprop="datePublished">2021-05-14</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/oda-v1.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/oda-v1.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/oda-v1.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2021/05/14/database/oda-v1/">database/oda-v1</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+            
+        
+        
+            
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-database/alter-database-move-datafile-to" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1116,214 +1291,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2021/02/22/linux/crontab-time-format-explain-in-detail/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-linux/backup-in-the-docker-dumpfile-0" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Docker/" rel="tag">Docker</a>, <a class="tag-link" href="/tags/MySQL/" rel="tag">MySQL</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/">
-            <time datetime="2021-02-20T16:46:34.382Z" itemprop="datePublished">2021-02-21</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/linux/backup-in-the-docker-dumpfile-0.md' target="_blank" rel="noopener"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/linux/backup-in-the-docker-dumpfile-0.md' target="_blank" rel="noopener"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/linux/backup-in-the-docker-dumpfile-0.md' target="_blank" rel="noopener"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/">在Docker中备份MySQL，备份文件中没有数据</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><p>在Docker中使用脚本备份MySQL的时候出现一个奇怪的问题，产生的备份文件大小都为零，没有任何数据。但是手动执行脚本文件时候，备份文件中数据是完整的。</p>
-<ul>
-<li>备份脚本如下</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># cat backup-mysql-redmine.sh </span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">bak_dir=<span class="string">"/backups/mysql-redmine"</span></span><br><span class="line">bak_time=`date +%Y%m%d-%H-%M-%S`</span><br><span class="line">docker <span class="built_in">exec</span> -it c51994799113 mysqldump -uroot -proot redmine &gt; <span class="variable">$bak_dir</span>/redmine-<span class="variable">$bak_time</span>.sql</span><br></pre></td></tr></table></figure>
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-linux/docker-installation-for-centos79" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/Docker/" rel="tag">Docker</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2021/02/20/linux/docker-installation-for-centos79/">
-            <time datetime="2021-02-20T15:02:32.735Z" itemprop="datePublished">2021-02-20</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/linux/docker-installation-for-centos79.md' target="_blank" rel="noopener"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/linux/docker-installation-for-centos79.md' target="_blank" rel="noopener"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/linux/docker-installation-for-centos79.md' target="_blank" rel="noopener"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2021/02/20/linux/docker-installation-for-centos79/">CentOS 7.9 安装 Docker</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                    
-                    
-                
-                
-                    
-                    <p><ul>
-<li>查看操作系统版本</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># cat /etc/redhat-release </span></span><br><span class="line">CentOS Linux release 7.9.2009 (Core)</span><br></pre></td></tr></table></figure>
-
-<p>
-                
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2021/02/20/linux/docker-installation-for-centos79/#more">Read More</a>
             </div>
         
         <footer class="article-footer">

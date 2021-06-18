@@ -225,7 +225,7 @@
                             &nbsp;
                             Oracle Database Appliance
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  <li class="file"><a href="/2021/06/18/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found/">Error getting repository data for ol6_x86_64_userspace_ksplice, repository not found</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -245,7 +245,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/2021/05/14/database/oda-v1/">database/oda-v1</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -317,6 +317,197 @@
 </aside>
             
             <section id="main">
+        <article id="post-database/oracle-audit-files-delete-test" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/11g/" rel="tag">11g</a>, <a class="tag-link" href="/tags/Audit/" rel="tag">Audit</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/01/27/database/oracle-audit-files-delete-test/">
+            <time datetime="2021-01-27T09:37:22.657Z" itemprop="datePublished">2021-01-27</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/oracle-audit-files-delete-test.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/oracle-audit-files-delete-test.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/oracle-audit-files-delete-test.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2021/01/27/database/oracle-audit-files-delete-test/">Oracle Audit目录中文件的内容以及是否可以删除</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                <p><ul>
+<li>先看下官方文档的说明<table>
+<thead>
+<tr>
+<th align="left">Property</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Parameter type</strong></td>
+<td align="left">String</td>
+</tr>
+<tr>
+<td align="left"><strong>Syntax</strong></td>
+<td align="left"><code>AUDIT_TRAIL = { none | os | db | db,extended | xml | xml,extended }</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Default value</strong></td>
+<td align="left"><code>none</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Modifiable</strong></td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><strong>Basic</strong></td>
+<td align="left">No</td>
+</tr>
+</tbody></table>
+</li>
+</ul></p>
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2021/01/27/database/oracle-audit-files-delete-test/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-database/oracle-asm-lun-size" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ASM/" rel="tag">ASM</a>, <a class="tag-link" href="/tags/LUN/" rel="tag">LUN</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/01/27/database/oracle-asm-lun-size/">
+            <time datetime="2021-01-27T09:37:22.651Z" itemprop="datePublished">2021-01-27</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/oracle-asm-lun-size.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/oracle-asm-lun-size.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/oracle-asm-lun-size.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2021/01/27/database/oracle-asm-lun-size/">Oracle ASM LUN Size</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+            
+        
+        
+            
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-database/oracle-12c-varchar2-extended" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -957,175 +1148,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2021/01/27/database/ora-00980-synonym-translation-is-no-longer-valid/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-database/ora-00600-internal-error-code-parameter-4511" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/10g/" rel="tag">10g</a>, <a class="tag-link" href="/tags/ORA-600/" rel="tag">ORA-600</a>, <a class="tag-link" href="/tags/RAC/" rel="tag">RAC</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/">
-            <time datetime="2021-01-27T09:37:22.595Z" itemprop="datePublished">2021-01-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/ora-00600-internal-error-code-parameter-4511.md' target="_blank" rel="noopener"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/ora-00600-internal-error-code-parameter-4511.md' target="_blank" rel="noopener"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/ora-00600-internal-error-code-parameter-4511.md' target="_blank" rel="noopener"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/">ORA-00600 内部错误代码 参数 [4511]</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                <p><ul>
-<li><p>平台：AIX 5.3</p>
-</li>
-<li><p>数据库：10.2.0.1.0</p>
-</li>
-<li><p>客户反映告警日志增长过快，发现告警日志中有大量的600错误，由于保密原因，一些敏感信息将被替换或者删除</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Tue Apr 28 17:09:14 2020</span><br><span class="line">Errors <span class="keyword">in</span> file /oracle/admin/racdb/udump/racdb2_ora_1581514.trc:</span><br><span class="line">ORA-00600: 内部错误代码, 参数: [4511], [], [], [], [], [], [], []</span><br><span class="line">Tue Apr 28 17:09:44 2020</span><br><span class="line">Errors <span class="keyword">in</span> file /oracle/admin/racdb/udump/racdb2_ora_496078.trc:</span><br><span class="line">ORA-00600: 内部错误代码, 参数: [4511], [], [], [], [], [], [], []</span><br><span class="line">Tue Apr 28 17:09:45 2020</span><br></pre></td></tr></table></figure></p>
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-database/oda-latest-patch-address" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Oracle-Database-Appliance/">Oracle Database Appliance</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/ODA/" rel="tag">ODA</a>, <a class="tag-link" href="/tags/Patch/" rel="tag">Patch</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2021/01/27/database/oda-latest-patch-address/">
-            <time datetime="2021-01-27T09:37:22.589Z" itemprop="datePublished">2021-01-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/oda-latest-patch-address.md' target="_blank" rel="noopener"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/oda-latest-patch-address.md' target="_blank" rel="noopener"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/oda-latest-patch-address.md' target="_blank" rel="noopener"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                <p><ul>
-<li><h3 id="登录官网链接"><a href="#登录官网链接" class="headerlink" title="登录官网链接"></a><a href="http://www.oracle.com/goto/oda/docs" target="_blank" rel="noopener">登录官网链接</a></h3></li>
-</ul>
-<img src="http://qnlcbj437.mudbub.com/static/images/oda-patch001.png?imageMogr2/auto-orient/thumbnail/900x/blur/1x0/quality/100|imageslim"></p>
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2021/01/27/database/oda-latest-patch-address/#more">Read More</a>
             </div>
         
         <footer class="article-footer">

@@ -225,7 +225,7 @@
                             &nbsp;
                             Oracle Database Appliance
                         </a>
-                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  </ul> 
+                         <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/oda-latest-patch-address/">ODA最新补丁文档和下载地址</a></li>  <li class="file"><a href="/2021/06/18/linux/Error-getting-repository-data-for-ol6_x86_64_userspace_ksplice-repository-not-found/">Error getting repository data for ol6_x86_64_userspace_ksplice, repository not found</a></li>  </ul> 
                     </li> 
                     
                     <li class="directory">
@@ -245,7 +245,7 @@
                         </a>
                          <ul class="unstyled" id="tree" >  <li class="file"><a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">SQL Server 2019 Installation for CentOS 7.8</a></li>  </ul> 
                     </li> 
-                     </ul> 
+                     <li class="file"><a href="/2021/05/14/database/oda-v1/">database/oda-v1</a></li>  </ul> 
     </div>
     <script>
         $(document).ready(function() {
@@ -317,6 +317,214 @@
 </aside>
             
             <section id="main">
+        <article id="post-linux/backup-in-the-docker-dumpfile-0" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Docker/" rel="tag">Docker</a>, <a class="tag-link" href="/tags/MySQL/" rel="tag">MySQL</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/">
+            <time datetime="2021-02-20T16:46:34.382Z" itemprop="datePublished">2021-02-21</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/linux/backup-in-the-docker-dumpfile-0.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/linux/backup-in-the-docker-dumpfile-0.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/linux/backup-in-the-docker-dumpfile-0.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/">在Docker中备份MySQL，备份文件中没有数据</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><p>在Docker中使用脚本备份MySQL的时候出现一个奇怪的问题，产生的备份文件大小都为零，没有任何数据。但是手动执行脚本文件时候，备份文件中数据是完整的。</p>
+<ul>
+<li>备份脚本如下</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># cat backup-mysql-redmine.sh </span></span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">bak_dir=<span class="string">"/backups/mysql-redmine"</span></span><br><span class="line">bak_time=`date +%Y%m%d-%H-%M-%S`</span><br><span class="line">docker <span class="built_in">exec</span> -it c51994799113 mysqldump -uroot -proot redmine &gt; <span class="variable">$bak_dir</span>/redmine-<span class="variable">$bak_time</span>.sql</span><br></pre></td></tr></table></figure>
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2021/02/21/linux/backup-in-the-docker-dumpfile-0/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
+        <article id="post-linux/docker-installation-for-centos79" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+                    <div class="article-meta">
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Docker/" rel="tag">Docker</a>
+    </div>
+
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2021/02/20/linux/docker-installation-for-centos79/">
+            <time datetime="2021-02-20T15:02:32.735Z" itemprop="datePublished">2021-02-20</time>
+        </a>
+    </div>
+
+
+                        
+                            <i class="fa fa-bar-chart"></i>
+                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
+                        
+                        
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/linux/docker-installation-for-centos79.md' target="_blank" rel="noopener"> Source </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/linux/docker-installation-for-centos79.md' target="_blank" rel="noopener"> Edit </a>
+                            </div>
+                            <div class="article-meta-button">
+                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/linux/docker-installation-for-centos79.md' target="_blank" rel="noopener"> History </a>
+                            </div>
+                        
+                    </div>
+                
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2021/02/20/linux/docker-installation-for-centos79/">CentOS 7.9 安装 Docker</a>
+        </h1>
+    
+
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+        
+            
+                
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                    
+                    
+                
+                
+                    
+                    <p><ul>
+<li>查看操作系统版本</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@docker-host ~]<span class="comment"># cat /etc/redhat-release </span></span><br><span class="line">CentOS Linux release 7.9.2009 (Core)</span><br></pre></td></tr></table></figure>
+
+<p>
+                
+            
+        
+        
+            </div>   
+            <div class="article-more-link">
+                <a href="/2021/02/20/linux/docker-installation-for-centos79/#more">Read More</a>
+            </div>
+        
+        <footer class="article-footer">
+        </footer>
+    </div>
+</article>
+
+
+
+
+
+
+    
         <article id="post-linux/zabbix50-server-is-not-running" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -961,178 +1169,6 @@
             </div>   
             <div class="article-more-link">
                 <a href="/2021/01/27/linux/centos8-mini-installed-then-install-desktop/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Oracle-Enterprise-Manager-Cloud-Control/">Oracle Enterprise Manager Cloud Control</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/19c/" rel="tag">19c</a>, <a class="tag-link" href="/tags/EMCC/" rel="tag">EMCC</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2021/01/27/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">
-            <time datetime="2021-01-27T09:37:22.726Z" itemprop="datePublished">2021-01-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method.md' target="_blank" rel="noopener"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method.md' target="_blank" rel="noopener"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method.md' target="_blank" rel="noopener"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2021/01/27/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/">The plug-in BI Publisher Configuration has failed its perform method</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                <p><ul>
-<li><p>平台：Oracle Linux 7.8</p>
-</li>
-<li><p>数据库： Oracle database 19c</p>
-</li>
-<li><p>EMCC： 13.4.0.0.0</p>
-</li>
-<li><p>19c &amp; EMCC13.4安装到%78日志报The plug-in BI Publisher Configuration has failed its perform method</p>
-</li>
-<li><p>CfmLogger_2020-06-07_03-20-28-PM.log</p>
-</li>
-</ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">INFO: oracle.sysman.top.oms:start writing</span><br><span class="line">INFO: oracle.sysman.top.oms:data written successfully</span><br><span class="line">INFO: oracle.sysman.top.oms:file flush successfully</span><br><span class="line">INFO: oracle.sysman.top.oms:file closed successfully</span><br><span class="line">INFO: oracle.sysman.top.oms:The plug-in BI Publisher Configuration has failed its perform method</span><br><span class="line">INFO: Cfm.save() was called</span><br><span class="line">INFO: Cfm.save(): 5 aggregate instances saved</span><br><span class="line">INFO: <span class="keyword">done</span> waiting <span class="keyword">for</span> Action from 18:05:05.846</span><br></pre></td></tr></table></figure></p>
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2021/01/27/database/the-plug-in-bi-iublisher-configuration-has-failed-its-perform-method/#more">Read More</a>
-            </div>
-        
-        <footer class="article-footer">
-        </footer>
-    </div>
-</article>
-
-
-
-
-
-
-    
-        <article id="post-database/sqlserver-2019-installation-for-centos78" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-                    <div class="article-meta">
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/SQL-Server/">SQL Server</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/12c/" rel="tag">12c</a>, <a class="tag-link" href="/tags/PDB/" rel="tag">PDB</a>
-    </div>
-
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">
-            <time datetime="2021-01-27T09:37:22.716Z" itemprop="datePublished">2021-01-27</time>
-        </a>
-    </div>
-
-
-                        
-                            <i class="fa fa-bar-chart"></i>
-                            <span id="busuanzi_container_site_pv"><span id="busuanzi_value_page_pv"></span></span>    
-                        
-                        
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/raw/writing/source/_posts/database/sqlserver-2019-installation-for-centos78.md' target="_blank" rel="noopener"> Source </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/edit/writing/source/_posts/database/sqlserver-2019-installation-for-centos78.md' target="_blank" rel="noopener"> Edit </a>
-                            </div>
-                            <div class="article-meta-button">
-                                <a href='https://github.com/falkon/mudbub/commits/writing/source/_posts/database/sqlserver-2019-installation-for-centos78.md' target="_blank" rel="noopener"> History </a>
-                            </div>
-                        
-                    </div>
-                
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/">SQL Server 2019 Installation for CentOS 7.8</a>
-        </h1>
-    
-
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-        
-            
-                
-                <p><h2 id="Microsoft-SQL-Server-For-Linux-installation-packages-description"><a href="#Microsoft-SQL-Server-For-Linux-installation-packages-description" class="headerlink" title="Microsoft SQL Server For Linux installation packages description"></a>Microsoft SQL Server For Linux installation packages description</h2><p>mssql-cli.x86_64 : Microsoft SQL Server CLI<br>mssql-mlservices-mlm-py-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-mlservices-mlm-r-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-mlservices-mml-py-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-mlservices-mml-r-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-mlservices-packages-py-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-mlservices-packages-r-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-mlservices-python-9.4.5.x86_64.x86_64 : Microsoft Machine Learning Services<br>mssql-server.x86_64 : Microsoft SQL Server Relational Database Engine<br>mssql-server-extensibility.x86_64 : Extensibility support for Microsoft SQL Server Relational Database Engine<br>mssql-server-extensibility-java.x86_64 : Extensibility Java language support for Microsoft SQL Server Relational Database Engine<br>mssql-server-fts.x86_64 : Microsoft SQL Server Full Text Search<br>mssql-server-ha.x86_64 : High Availability support for Microsoft SQL Server Relational Database Engine<br>mssql-server-is.x86_64 : Microsoft SQL Server Integration Services<br>mssql-tools.x86_64 : Tools for Microsoft(R) SQL Server (R)<br>mssql-server-polybase-15.0.4073.23-4.x86_64 : Microsoft SQL Server Polybase for SQL server,Oracle,Teradata,Mongodb<br>mssql-server-polybase-hadoop-15.0.4073.23-4.x86 : Microsoft SQL Server Polybase for Hadoop</p></p>
-            
-        
-        
-            </div>   
-            <div class="article-more-link">
-                <a href="/2021/01/27/database/sqlserver-2019-installation-for-centos78/#more">Read More</a>
             </div>
         
         <footer class="article-footer">
