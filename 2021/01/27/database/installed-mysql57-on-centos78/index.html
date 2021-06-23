@@ -50,9 +50,9 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-database/mysql57-installation-for-centos78" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-database/installed-mysql57-on-centos78" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/01/27/database/mysql57-installation-for-centos78/" class="article-date">
+    <a href="/2021/01/27/database/installed-mysql57-on-centos78/" class="article-date">
   <time class="dt-published" datetime="2021-01-27T09:37:22.580Z" itemprop="datePublished">2021-01-27</time>
 </a>
     
@@ -85,84 +85,63 @@
 <li>上传安装包到home目录<br>使用sftp或者ftp工具将下载的tar包上传到服务的home目录下</li>
 </ul>
 <h3 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h3><ul>
-<li>查询MariaDB及组件</li>
-</ul>
+<li><p>查询MariaDB及组件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -qa | grep mariadb</span></span><br><span class="line">mariadb-libs-5.5.68-1.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>卸载MaridDB及组件</li>
-</ul>
+</li>
+<li><p>卸载MaridDB及组件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -e mariadb-libs-5.5.68-1.el7.x86_64</span></span><br><span class="line">error: Failed dependencies: &lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><br><span class="line">	libmysqlclient.so.18()(64bit) is needed by (installed) postfix-2:2.10.1-9.el7.x86_64</span><br><span class="line">	libmysqlclient.so.18(libmysqlclient_18)(64bit) is needed by (installed) postfix-2:2.10.1-9.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>强制卸载MariaDB及组件</li>
-</ul>
+</li>
+<li><p>强制卸载MariaDB及组件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -e mariadb-libs-5.5.68-1.el7.x86_64 --nodeps</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装MySQL 5.x所需的依赖包</li>
-</ul>
+</li>
+<li><p>安装MySQL 5.x所需的依赖包</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># yum -y install libaio* perl* net-tools*</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>解压上传的MySQL安装包</li>
-</ul>
+</li>
+<li><p>解压上传的MySQL安装包</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># tar xvf mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看解压后的安装包</li>
-</ul>
+</li>
+<li><p>查看解压后的安装包</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># ll</span></span><br><span class="line">total 1036896</span><br><span class="line">-rw-r--r--. 1 root root  530882560 Dec  9 13:50 mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar</span><br><span class="line">-rw-r--r--. 1 7155 31415  25381952 Apr 15  2019 mysql-community-client-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415    280904 Apr 15  2019 mysql-community-common-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415   3838100 Apr 15  2019 mysql-community-devel-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415  47076368 Apr 15  2019 mysql-community-embedded-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415  24086952 Apr 15  2019 mysql-community-embedded-compat-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415 130023844 Apr 15  2019 mysql-community-embedded-devel-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415   2274268 Apr 15  2019 mysql-community-libs-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415   2118444 Apr 15  2019 mysql-community-libs-compat-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415 173541272 Apr 15  2019 mysql-community-server-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415 122249684 Apr 15  2019 mysql-community-test-5.7.26-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>进行RPM安装</li>
-</ul>
+</li>
+<li><p>进行RPM安装</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -ivh *.rpm</span></span><br><span class="line">warning: mysql-community-client-5.7.26-1.el7.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY</span><br><span class="line">Preparing...                          <span class="comment">################################# [100%]</span></span><br><span class="line">Updating / installing...</span><br><span class="line">   1:mysql-community-common-5.7.26-1.e<span class="comment">################################# [ 10%]</span></span><br><span class="line">   2:mysql-community-libs-5.7.26-1.el7<span class="comment">################################# [ 20%]</span></span><br><span class="line">   3:mysql-community-client-5.7.26-1.e<span class="comment">################################# [ 30%]</span></span><br><span class="line">   4:mysql-community-server-5.7.26-1.e<span class="comment">################################# [ 40%]</span></span><br><span class="line">   5:mysql-community-devel-5.7.26-1.el<span class="comment">################################# [ 50%]</span></span><br><span class="line">   6:mysql-community-embedded-5.7.26-1<span class="comment">################################# [ 60%]</span></span><br><span class="line">   7:mysql-community-embedded-devel-5.<span class="comment">################################# [ 70%]</span></span><br><span class="line">   8:mysql-community-test-5.7.26-1.el7<span class="comment">################################# [ 80%]</span></span><br><span class="line">   9:mysql-community-libs-compat-5.7.2<span class="comment">################################# [ 90%]</span></span><br><span class="line">  10:mysql-community-embedded-compat-5<span class="comment">################################# [100%]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看mysqld服务状态</li>
-</ul>
+</li>
+<li><p>查看mysqld服务状态</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># systemctl status mysqld</span></span><br><span class="line">● mysqld.service - MySQL Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: inactive (dead)</span><br><span class="line">     Docs: man:mysqld(8)</span><br><span class="line">           http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br></pre></td></tr></table></figure>
-
-<p>启动mysqld服务</p>
+</li>
+<li><p>启动mysqld服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># systemctl start mysqld</span></span><br><span class="line">[root@mysql57 home]<span class="comment"># systemctl status mysqld</span></span><br><span class="line">● mysqld.service - MySQL Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Wed 2020-12-09 14:23:27 CST; 4s ago</span><br><span class="line">     Docs: man:mysqld(8)</span><br><span class="line">           http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">  Process: 2812 ExecStart=/usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid <span class="variable">$MYSQLD_OPTS</span> (code=exited, status=0/SUCCESS)</span><br><span class="line">  Process: 2738 ExecStartPre=/usr/bin/mysqld_pre_systemd (code=exited, status=0/SUCCESS)</span><br><span class="line"> Main PID: 2815 (mysqld)</span><br><span class="line">    Tasks: 27</span><br><span class="line">   CGroup: /system.slice/mysqld.service</span><br><span class="line">           └─2815 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid</span><br><span class="line"></span><br><span class="line">Dec 09 14:23:25 mysql57 systemd[1]: Starting MySQL Server...</span><br><span class="line">Dec 09 14:23:27 mysql57 systemd[1]: Started MySQL Server.</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>开启mysqld开机启动服务</li>
-</ul>
+</li>
+<li><p>开启mysqld开机启动服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># systemctl enable mysqld</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查找默认的安装密码</li>
-</ul>
+</li>
+<li><p>查找默认的安装密码</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># grep password /var/log/mysqld.log</span></span><br><span class="line">2020-12-09T06:23:25.478974Z 1 [Note] A temporary password is generated <span class="keyword">for</span> root@localhost: ylN+.*=w1Zl9</span><br></pre></td></tr></table></figure>
-<ul>
-<li>登入MySQL数据库</li>
-</ul>
+</li>
+<li><p>登入MySQL数据库</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.7.26</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改默认密码</li>
-</ul>
+</li>
+<li><p>修改默认密码</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set password = password("PP--ssw00rd");</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.01 sec)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>开启远程连接</li>
-</ul>
+</li>
+<li><p>开启远程连接</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'PP--ssw00rd' WITH GRANT OPTION;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <h3 id="my-conf配置"><a href="#my-conf配置" class="headerlink" title="my.conf配置"></a>my.conf配置</h3><ul>
-<li>修改数据库字符集</li>
-</ul>
+<li><p>修改数据库字符集</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">character_set_server = utf8mb4</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置binlog</li>
-</ul>
+</li>
+<li><p>配置binlog</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">log</span>-bin=mysql-bin</span><br><span class="line">server_id=2</span><br><span class="line">sync_binlog=0</span><br><span class="line">binlog_format=mixed</span><br><span class="line">expire_logs_days=7</span><br><span class="line">max_binlog_size=100m</span><br><span class="line">binlog_cache_size=4m</span><br><span class="line">max_binlog_cache_size=512m</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/mysql57-installation-for-centos78/" data-id="ckq8v7jn7000rlom2cjc78fa3" data-title="MySQL5.7在CentOS7.8平台上的部署" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/installed-mysql57-on-centos78/" data-id="ckq8yfx2u000hosm28b91hfaa" data-title="MySQL5.7在CentOS7.8平台上的部署" class="article-share-link">Share</a>
       
       
       

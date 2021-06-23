@@ -80,33 +80,26 @@
 <a id="more"></a>
 
 <ul>
-<li>查看队列显示如下错误</li>
-</ul>
+<li><p>查看队列显示如下错误</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">connection to Zabbix server <span class="string">"localhost"</span> failed. Possible reasons:</span><br><span class="line">1. incorrect server IP/DNS <span class="keyword">in</span> the <span class="string">"zabbix.conf.php"</span>;</span><br><span class="line">2. incorrect DNS server configuration.</span><br><span class="line">Permission denied</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看操作系统版本</li>
-</ul>
+</li>
+<li><p>查看操作系统版本</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># cat /etc/redhat-release </span></span><br><span class="line">CentOS Linux release 8.1.1911 (Core)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看Zabbix版本</li>
-</ul>
+</li>
+<li><p>查看Zabbix版本</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># /usr/local/zabbix/sbin/zabbix_server -V</span></span><br><span class="line">zabbix_server (Zabbix) 5.0.1</span><br><span class="line">Revision c2a0b03480 25 May 2020, compilation time: Jun 10 2020 22:18:13</span><br><span class="line"></span><br><span class="line">Copyright (C) 2020 Zabbix SIA</span><br><span class="line">License GPLv2+: GNU GPL version 2 or later &lt;http://gnu.org/licenses/gpl.html&gt;.</span><br><span class="line">This is free software: you are free to change and redistribute it according to</span><br><span class="line">the license. There is NO WARRANTY, to the extent permitted by law.</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看selinux状态</li>
-</ul>
+</li>
+<li><p>查看selinux状态</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># getenforce </span></span><br><span class="line">enforcing</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>关闭selinux并重启</li>
+</li>
+<li><p>关闭selinux并重启</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：selinux从7.x往后的永久修改关闭的文件跟6.x有很大的却别，</span></span><br><span class="line"><span class="comment"># 6.x关闭的文件为/etc/sysconfig/selinux，</span></span><br><span class="line"><span class="comment"># 7.x及以后的版本修改的文件为/etc/selinux/config</span></span><br><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># vi /etc/selinux/config #SELINUX=disabled</span></span><br><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># reboot</span></span><br><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># getenforce </span></span><br><span class="line">Disabled</span><br></pre></td></tr></table></figure></li>
 </ul>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意：selinux从7.x往后的永久修改关闭的文件跟6.x有很大的却别，6.x关闭的文件为/etc/sysconfig/selinux，而7.x及以后的版本修改的文件为/etc/selinux/config</span></span><br><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># vi /etc/selinux/config #SELINUX=disabled</span></span><br><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># reboot</span></span><br><span class="line">[root@pe-sysmonitor-zabbix ~]<span class="comment"># getenforce </span></span><br><span class="line">Disabled</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/linux/zabbix50-server-is-not-running/" data-id="ckq8v7joe003rlom29yq2086v" data-title="ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/linux/zabbix50-server-is-not-running/" data-id="ckq8yfx4b003xosm27f546s86" data-title="ZABBIX SERVER IS NOT RENNING THE INFORMATION DISPLAYED MAY NOT BE CORRECT" class="article-share-link">Share</a>
       
       
       
@@ -118,7 +111,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/02/20/linux/docker-installation-for-centos79/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/02/20/linux/installed-docker-on-centos79/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         

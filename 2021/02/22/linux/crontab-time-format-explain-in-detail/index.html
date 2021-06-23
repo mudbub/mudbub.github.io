@@ -77,41 +77,32 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <ul>
-<li>工作定义示例</li>
-</ul>
+<li><p>工作定义示例</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Example of job definition:</span></span><br><span class="line"><span class="comment"># .---------------- minute (0 - 59)</span></span><br><span class="line"><span class="comment"># |  .------------- hour (0 - 23)</span></span><br><span class="line"><span class="comment"># |  |  .---------- day of month (1 - 31)</span></span><br><span class="line"><span class="comment"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</span></span><br><span class="line"><span class="comment"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</span></span><br><span class="line"><span class="comment"># |  |  |  |  |</span></span><br><span class="line"><span class="comment"># *  *  *  *  * user-name  command to be executed</span></span><br></pre></td></tr></table></figure>
-
-<ul>
+</li>
 <li><p>由上面的示例可以看到，整个crontab由三个部分组成：第一部分为时间；第二部分为用户；第三部分为命令。我们着重理解时间部分的定义，时间部分默认由5个<code>*</code>组成，从左至右分别代表分钟（0-59）、小时（0-23）、天（1-31）、月（1-12）、周（0-6），从下面的示例中来理解这些时间之间是如何配合的。</p>
 </li>
 <li><p>加入我们的数据库需要在每天晚上11点进行备份，脚本我们已经写好了，那么我们要如何来设置这个计划任务呢？首先我们看下分钟的部分，因为11点是整时，正常的时间显示是：<code>PM 11:00</code>，由于这里是24小时制，所以正确的时间写法是：<code>23:00</code>，由于crontab的时间格式为分钟在前，小时在后，那么时间的写法为：00 23，我们可以如下所示编写计划任务。</p>
-</li>
-</ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * * backup-database.sh</span><br></pre></td></tr></table></figure>
-
-
-<ul>
-<li>脚本写好后，我们需要测试备份脚本，不可能等到晚上11点，我们想每隔10分钟执行一次数据库备份，以便来测试备份脚本，我们需要怎么做呢？我们可以通过<code>/</code>来对时间间隔进行处理，如下所示：</li>
-</ul>
+</li>
+<li><p>脚本写好后，我们需要测试备份脚本，不可能等到晚上11点，我们想每隔10分钟执行一次数据库备份，以便来测试备份脚本，我们需要怎么做呢？我们可以通过<code>/</code>来对时间间隔进行处理，如下所示：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/10 * * * * backup-database.sh</span><br></pre></td></tr></table></figure>
-
-<ul>
+</li>
 <li><p>那么如果每隔2小时或者两天、两个月呢？同理，只要在相应的时间位置上<code>*/2</code>就可以。</p>
 </li>
 <li><p>如果我们这样写<code>*/2 */2 */2 */2 */2</code>会出现什么样的效果呢 ，留给各位的思考，哈哈哈？</p>
 </li>
 <li><p>上面演示的都是安装固定的时间或者固定的间隔时间在进行计划任务的，但是我们根据备份周期的要求，备份只能在周一至周五运行，周六和周天不执行备份，那么我们可以使用<code>-</code>来指定从什么时间到什么时间，如下所示：</p>
-</li>
-</ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 23 * * 0-4 backup-database.sh</span><br></pre></td></tr></table></figure>
-<ul>
-<li>其他的指定时间段同理，比如从0-10分钟这个时间段（如果后面的小时为<code>*</code>，如：<code>0-10 * * * *</code>，表示每个小时的0-10分钟都会运行脚本），我们看下时间段内复杂的写法，<code>0-10 0-10 1-10 1-6 0-4</code>，这样的写法代表，1至10月的1号-10号的0点-10点的0份-10分运行这个脚本，这里有个特殊的地方最后一些的周一至周五的时间和1号-10号的时间是怎么处理的</li>
+</li>
+<li><p>其他的指定时间段同理，比如从0-10分钟这个时间段（如果后面的小时为<code>*</code>，如：<code>0-10 * * * *</code>，表示每个小时的0-10分钟都会运行脚本），我们看下时间段内复杂的写法，<code>0-10 0-10 1-10 1-6 0-4</code>，这样的写法代表，1至10月的1号-10号的0点-10点的0份-10分运行这个脚本，这里有个特殊的地方最后一些的周一至周五的时间和1号-10号的时间是怎么处理的</p>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/02/22/linux/crontab-time-format-explain-in-detail/" data-id="ckq8v7jo1002ulom282mu0ymd" data-title="Linux crontab工作定义详解" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/02/22/linux/crontab-time-format-explain-in-detail/" data-id="ckq8yfx3y0032osm24znmajv2" data-title="Linux crontab工作定义详解" class="article-share-link">Share</a>
       
       
       

@@ -82,30 +82,25 @@
 <a id="more"></a>
 
 <ul>
-<li>列出可以安装的选项 </li>
-</ul>
+<li><p>列出可以安装的选项 </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@yongstoneinc yum.repos.d]<span class="comment"># yum grouplist</span></span><br><span class="line">CentOS-BaseOS-8 - Media                                                                                                                      71 MB/s | 2.2 MB     00:00</span><br><span class="line">CentOS-AppStream-8 - Media                                                                                                                   85 MB/s | 5.7 MB     00:00</span><br><span class="line">Available Environment Groups:</span><br><span class="line">   Server with GUI</span><br><span class="line">   Server</span><br><span class="line">   Workstation</span><br><span class="line">   Custom Operating System</span><br><span class="line">   Virtualization Host</span><br><span class="line">Installed Environment Groups:</span><br><span class="line">   Minimal Install</span><br><span class="line">Available Groups:</span><br><span class="line">   Legacy UNIX Compatibility</span><br><span class="line">   Container Management</span><br><span class="line">   Development Tools</span><br><span class="line">   .NET Core Development</span><br><span class="line">   Graphical Administration Tools</span><br><span class="line">   Headless Management</span><br><span class="line">   Network Servers</span><br><span class="line">   RPM Development Tools</span><br><span class="line">   Scientific Support</span><br><span class="line">   Security Tools</span><br><span class="line">   Smart Card Support</span><br><span class="line">   System Tools</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装Server with GUI</li>
-</ul>
+</li>
+<li><p>安装Server with GUI</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yongstoneinc yum.repos.d]<span class="comment"># yum groupinstall "Server with GUI"</span></span><br><span class="line">Last metadata expiration check: 0:05:31 ago on Thu 13 Aug 2020 12:47:36 AM CST.</span><br><span class="line">no group <span class="string">'dns-server'</span> from environment <span class="string">'graphical-server-environment'</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"insights-client"</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"hpijs"</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"centos-release-eula"</span></span><br><span class="line">Dependencies resolved.</span><br><span class="line">......</span><br><span class="line">Transaction Summary</span><br><span class="line">==============================================================================================</span><br><span class="line">Install  929 Packages</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>将模式的命令行模式修改图形模式</li>
-</ul>
+</li>
+<li><p>将模式的命令行模式修改图形模式</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@yongstoneinc ~]<span class="comment"># systemctl get-default</span></span><br><span class="line">multi-user.target</span><br><span class="line">[root@yongstoneinc ~]<span class="comment"># systemctl set-default graphical.target</span></span><br><span class="line">Removed /etc/systemd/system/default.target.</span><br><span class="line">Created symlink /etc/systemd/system/default.target → /usr/lib/systemd/system/graphical.target.</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>卸载Server with GUI</li>
-</ul>
+</li>
+<li><p>卸载Server with GUI</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@yongstoneinc yum.repos.d]<span class="comment"># yum groupremove "Server with GUI"</span></span><br><span class="line">Last metadata expiration check: 0:05:31 ago on Thu 13 Aug 2020 12:47:36 AM CST.</span><br><span class="line">no group <span class="string">'dns-server'</span> from environment <span class="string">'graphical-server-environment'</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"insights-client"</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"hpijs"</span></span><br><span class="line">No match <span class="keyword">for</span> group package <span class="string">"centos-release-eula"</span></span><br><span class="line">Dependencies resolved.</span><br><span class="line">......</span><br><span class="line">Transaction Summary</span><br><span class="line">==============================================================================================</span><br><span class="line">Install  929 Packages</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/linux/centos8-mini-installed-then-install-desktop/" data-id="ckq8v7jo60038lom2crrp85ak" data-title="CentOS 8 Mini installed then installation Desktop" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/linux/centos8-mini-installed-then-install-desktop/" data-id="ckq8yfx3w002wosm2dfti7esd" data-title="CentOS 8 Mini installed then installation Desktop" class="article-share-link">Share</a>
       
       
       

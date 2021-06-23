@@ -57,7 +57,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Oracle/">Oracle</a>
+    <a class="article-category-link" href="/categories/Oracle-Database-Appliance/">Oracle Database Appliance</a>
   </div>
 
   </div>
@@ -80,16 +80,11 @@
 <li><p>客户的一套ODA X8-2 HA的数据库一体机说是无法罐装系统，看完之后发现工程师电脑的JDK版本有有问题，无法调用ODA一体机的虚拟控制台，在使用自己电脑罐装系统后发现有一台节点的本地磁盘变成了两块，默认是两块NVMe的SSD做好了RAID，进入BIOS查看后发现有问题的节点（节点1）的Boot Option和节点2的不一样。具体如下：</p>
 </li>
 <li><p>节点1和节点2的Boot Option对比</p>
-</li>
-</ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">节点1</span><br><span class="line">Boot Option <span class="comment">#1 [Oracle DB Appliance (P4: INTEL SSDSCKKB480GB)]</span></span><br><span class="line"></span><br><span class="line">节点2</span><br><span class="line">Boot Option <span class="comment">#1 [Oracle DB Appliance (Intel Volume0)]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>检查PCH SATA Configuration</li>
-</ul>
+</li>
+<li><p>检查PCH SATA Configuration</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">节点1</span><br><span class="line">Configure SATA as [AHCI]</span><br><span class="line">节点2</span><br><span class="line">Configure SATA as [RAID]</span><br><span class="line"></span><br><span class="line">发下节点的1的模式被修改成了AHCI</span><br></pre></td></tr></table></figure>
-
-<ul>
+</li>
 <li><p>将节点的模式改回RAID后，创建RAID名称Volume0，创建完成后保存配置重启。重新启动后检查RAID模式是否正常，然后再重新刷机。</p>
 </li>
 <li><p>刷机完成后检查正常，数据库可以正常安装和使用</p>
@@ -99,7 +94,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/03/26/database/oda-x8-2-ha-nvme-raid/" data-id="ckq8v7jnc0015lom23rwbez8i" data-title="ODA X8-2 HA RAID模式错误处理" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/03/26/database/oda-x8-2-ha-nvme-raid/" data-id="ckq8yfx330018osm2g7fh5svk" data-title="ODA X8-2 HA RAID模式错误处理" class="article-share-link">Share</a>
       
       
       

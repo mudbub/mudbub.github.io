@@ -93,7 +93,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/" data-id="ckq8v7jnb0011lom20cah2td8" data-title="ORA-00600 内部错误代码 参数 [4511]" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/ora-00600-internal-error-code-parameter-4511/" data-id="ckq8yfx330015osm23nl126wc" data-title="ORA-00600 内部错误代码 参数 [4511]" class="article-share-link">Share</a>
       
       
       
@@ -145,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/oda-latest-patch-address/" data-id="ckq8v7jn9000ylom2ba650rmv" data-title="ODA最新补丁文档和下载地址" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/oda-latest-patch-address/" data-id="ckq8yfx320011osm2gxdjgy7f" data-title="ODA最新补丁文档和下载地址" class="article-share-link">Share</a>
       
       
       
@@ -159,9 +159,9 @@
 
 
   
-    <article id="post-database/mysql57-installation-for-centos78" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-database/installed-mysql57-on-centos78" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/01/27/database/mysql57-installation-for-centos78/" class="article-date">
+    <a href="/2021/01/27/database/installed-mysql57-on-centos78/" class="article-date">
   <time class="dt-published" datetime="2021-01-27T09:37:22.580Z" itemprop="datePublished">2021-01-27</time>
 </a>
     
@@ -177,7 +177,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/01/27/database/mysql57-installation-for-centos78/">MySQL5.7在CentOS7.8平台上的部署</a>
+      <a class="p-name article-title" href="/2021/01/27/database/installed-mysql57-on-centos78/">MySQL5.7在CentOS7.8平台上的部署</a>
     </h1>
   
 
@@ -194,84 +194,63 @@
 <li>上传安装包到home目录<br>使用sftp或者ftp工具将下载的tar包上传到服务的home目录下</li>
 </ul>
 <h3 id="MySQL安装"><a href="#MySQL安装" class="headerlink" title="MySQL安装"></a>MySQL安装</h3><ul>
-<li>查询MariaDB及组件</li>
-</ul>
+<li><p>查询MariaDB及组件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -qa | grep mariadb</span></span><br><span class="line">mariadb-libs-5.5.68-1.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>卸载MaridDB及组件</li>
-</ul>
+</li>
+<li><p>卸载MaridDB及组件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -e mariadb-libs-5.5.68-1.el7.x86_64</span></span><br><span class="line">error: Failed dependencies: &lt;&lt;&lt;&lt;&lt;&lt;&lt;</span><br><span class="line">	libmysqlclient.so.18()(64bit) is needed by (installed) postfix-2:2.10.1-9.el7.x86_64</span><br><span class="line">	libmysqlclient.so.18(libmysqlclient_18)(64bit) is needed by (installed) postfix-2:2.10.1-9.el7.x86_64</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>强制卸载MariaDB及组件</li>
-</ul>
+</li>
+<li><p>强制卸载MariaDB及组件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -e mariadb-libs-5.5.68-1.el7.x86_64 --nodeps</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>安装MySQL 5.x所需的依赖包</li>
-</ul>
+</li>
+<li><p>安装MySQL 5.x所需的依赖包</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># yum -y install libaio* perl* net-tools*</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>解压上传的MySQL安装包</li>
-</ul>
+</li>
+<li><p>解压上传的MySQL安装包</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># tar xvf mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>查看解压后的安装包</li>
-</ul>
+</li>
+<li><p>查看解压后的安装包</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># ll</span></span><br><span class="line">total 1036896</span><br><span class="line">-rw-r--r--. 1 root root  530882560 Dec  9 13:50 mysql-5.7.26-1.el7.x86_64.rpm-bundle.tar</span><br><span class="line">-rw-r--r--. 1 7155 31415  25381952 Apr 15  2019 mysql-community-client-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415    280904 Apr 15  2019 mysql-community-common-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415   3838100 Apr 15  2019 mysql-community-devel-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415  47076368 Apr 15  2019 mysql-community-embedded-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415  24086952 Apr 15  2019 mysql-community-embedded-compat-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415 130023844 Apr 15  2019 mysql-community-embedded-devel-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415   2274268 Apr 15  2019 mysql-community-libs-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415   2118444 Apr 15  2019 mysql-community-libs-compat-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415 173541272 Apr 15  2019 mysql-community-server-5.7.26-1.el7.x86_64.rpm</span><br><span class="line">-rw-r--r--. 1 7155 31415 122249684 Apr 15  2019 mysql-community-test-5.7.26-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>进行RPM安装</li>
-</ul>
+</li>
+<li><p>进行RPM安装</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># rpm -ivh *.rpm</span></span><br><span class="line">warning: mysql-community-client-5.7.26-1.el7.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY</span><br><span class="line">Preparing...                          <span class="comment">################################# [100%]</span></span><br><span class="line">Updating / installing...</span><br><span class="line">   1:mysql-community-common-5.7.26-1.e<span class="comment">################################# [ 10%]</span></span><br><span class="line">   2:mysql-community-libs-5.7.26-1.el7<span class="comment">################################# [ 20%]</span></span><br><span class="line">   3:mysql-community-client-5.7.26-1.e<span class="comment">################################# [ 30%]</span></span><br><span class="line">   4:mysql-community-server-5.7.26-1.e<span class="comment">################################# [ 40%]</span></span><br><span class="line">   5:mysql-community-devel-5.7.26-1.el<span class="comment">################################# [ 50%]</span></span><br><span class="line">   6:mysql-community-embedded-5.7.26-1<span class="comment">################################# [ 60%]</span></span><br><span class="line">   7:mysql-community-embedded-devel-5.<span class="comment">################################# [ 70%]</span></span><br><span class="line">   8:mysql-community-test-5.7.26-1.el7<span class="comment">################################# [ 80%]</span></span><br><span class="line">   9:mysql-community-libs-compat-5.7.2<span class="comment">################################# [ 90%]</span></span><br><span class="line">  10:mysql-community-embedded-compat-5<span class="comment">################################# [100%]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看mysqld服务状态</li>
-</ul>
+</li>
+<li><p>查看mysqld服务状态</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># systemctl status mysqld</span></span><br><span class="line">● mysqld.service - MySQL Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: inactive (dead)</span><br><span class="line">     Docs: man:mysqld(8)</span><br><span class="line">           http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br></pre></td></tr></table></figure>
-
-<p>启动mysqld服务</p>
+</li>
+<li><p>启动mysqld服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># systemctl start mysqld</span></span><br><span class="line">[root@mysql57 home]<span class="comment"># systemctl status mysqld</span></span><br><span class="line">● mysqld.service - MySQL Server</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Wed 2020-12-09 14:23:27 CST; 4s ago</span><br><span class="line">     Docs: man:mysqld(8)</span><br><span class="line">           http://dev.mysql.com/doc/refman/en/using-systemd.html</span><br><span class="line">  Process: 2812 ExecStart=/usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid <span class="variable">$MYSQLD_OPTS</span> (code=exited, status=0/SUCCESS)</span><br><span class="line">  Process: 2738 ExecStartPre=/usr/bin/mysqld_pre_systemd (code=exited, status=0/SUCCESS)</span><br><span class="line"> Main PID: 2815 (mysqld)</span><br><span class="line">    Tasks: 27</span><br><span class="line">   CGroup: /system.slice/mysqld.service</span><br><span class="line">           └─2815 /usr/sbin/mysqld --daemonize --pid-file=/var/run/mysqld/mysqld.pid</span><br><span class="line"></span><br><span class="line">Dec 09 14:23:25 mysql57 systemd[1]: Starting MySQL Server...</span><br><span class="line">Dec 09 14:23:27 mysql57 systemd[1]: Started MySQL Server.</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>开启mysqld开机启动服务</li>
-</ul>
+</li>
+<li><p>开启mysqld开机启动服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># systemctl enable mysqld</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查找默认的安装密码</li>
-</ul>
+</li>
+<li><p>查找默认的安装密码</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># grep password /var/log/mysqld.log</span></span><br><span class="line">2020-12-09T06:23:25.478974Z 1 [Note] A temporary password is generated <span class="keyword">for</span> root@localhost: ylN+.*=w1Zl9</span><br></pre></td></tr></table></figure>
-<ul>
-<li>登入MySQL数据库</li>
-</ul>
+</li>
+<li><p>登入MySQL数据库</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@mysql57 home]<span class="comment"># mysql -u root -p</span></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 2</span><br><span class="line">Server version: 5.7.26</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>修改默认密码</li>
-</ul>
+</li>
+<li><p>修改默认密码</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set password = password("PP--ssw00rd");</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.01 sec)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>开启远程连接</li>
-</ul>
+</li>
+<li><p>开启远程连接</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'PP--ssw00rd' WITH GRANT OPTION;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <h3 id="my-conf配置"><a href="#my-conf配置" class="headerlink" title="my.conf配置"></a>my.conf配置</h3><ul>
-<li>修改数据库字符集</li>
-</ul>
+<li><p>修改数据库字符集</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">character_set_server = utf8mb4</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>配置binlog</li>
-</ul>
+</li>
+<li><p>配置binlog</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">log</span>-bin=mysql-bin</span><br><span class="line">server_id=2</span><br><span class="line">sync_binlog=0</span><br><span class="line">binlog_format=mixed</span><br><span class="line">expire_logs_days=7</span><br><span class="line">max_binlog_size=100m</span><br><span class="line">binlog_cache_size=4m</span><br><span class="line">max_binlog_cache_size=512m</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/mysql57-installation-for-centos78/" data-id="ckq8v7jn7000rlom2cjc78fa3" data-title="MySQL5.7在CentOS7.8平台上的部署" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/installed-mysql57-on-centos78/" data-id="ckq8yfx2u000hosm28b91hfaa" data-title="MySQL5.7在CentOS7.8平台上的部署" class="article-share-link">Share</a>
       
       
       
@@ -322,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/expdp-impdp/" data-id="ckq8v7jmy0007lom2duu1fcta" data-title="Oracle 数据泵的基本使用" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/expdp-impdp/" data-id="ckq8yfx2o0009osm20my10iql" data-title="Oracle 数据泵的基本使用" class="article-share-link">Share</a>
       
       
       
@@ -375,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/exp-imp/" data-id="ckq8v7jn2000dlom26cuc3xa8" data-title="Oracle 导入导出工具的基本使用" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/exp-imp/" data-id="ckq8yfx2m0007osm26pb52uop" data-title="Oracle 导入导出工具的基本使用" class="article-share-link">Share</a>
       
       
       
@@ -415,28 +394,26 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="EMCC-13-4启动遭遇Oracle-Management-Server-Could-Not-Be-Started"><a href="#EMCC-13-4启动遭遇Oracle-Management-Server-Could-Not-Be-Started" class="headerlink" title="EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started"></a>EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[oracle@pe-dbmonitor-emcc bin]$ ./emctl start oms</span><br><span class="line">Oracle Enterprise Manager Cloud Control 13c Release 4  </span><br><span class="line">Copyright (c) 1996, 2020 Oracle Corporation.  All rights reserved.</span><br><span class="line">Starting Oracle Management Server...</span><br><span class="line">WebTier Successfully Started</span><br><span class="line">Oracle Management Server Could Not Be Started</span><br><span class="line">Check EM Server <span class="built_in">log</span> file <span class="keyword">for</span> details: /u01/app/oracle/gc_inst/user_projects/domains/GCDomain/servers/EMGC_OMS1/logs/EMGC_OMS1.out</span><br><span class="line">AdminServer Could Not Be Started</span><br><span class="line">Check Admin Server <span class="built_in">log</span> file <span class="keyword">for</span> details: /u01/app/oracle/gc_inst/user_projects/domains/GCDomain/servers/EMGC_ADMINSERVER/logs/EMGC_ADMINSERVER.out</span><br><span class="line">Oracle Management Server is Down</span><br><span class="line">JVMD Engine is Down</span><br><span class="line">Starting BI Publisher Server ...</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>查看具体日志</li>
-</ul>
+        <ul>
+<li><p>EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[oracle@pe-dbmonitor-emcc bin]$ ./emctl start oms</span><br><span class="line">Oracle Enterprise Manager Cloud Control 13c Release 4  </span><br><span class="line">Copyright (c) 1996, 2020 Oracle Corporation.  All rights reserved.</span><br><span class="line">Starting Oracle Management Server...</span><br><span class="line">WebTier Successfully Started</span><br><span class="line">Oracle Management Server Could Not Be Started</span><br><span class="line">Check EM Server <span class="built_in">log</span> file <span class="keyword">for</span> details: /u01/app/oracle/gc_inst/user_projects/domains/GCDomain/servers/EMGC_OMS1/logs/EMGC_OMS1.out</span><br><span class="line">AdminServer Could Not Be Started</span><br><span class="line">Check Admin Server <span class="built_in">log</span> file <span class="keyword">for</span> details: /u01/app/oracle/gc_inst/user_projects/domains/GCDomain/servers/EMGC_ADMINSERVER/logs/EMGC_ADMINSERVER.out</span><br><span class="line">Oracle Management Server is Down</span><br><span class="line">JVMD Engine is Down</span><br><span class="line">Starting BI Publisher Server ...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看具体日志</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">[oracle@pe-dbmonitor-emcc ~]$ more /u01/app/oracle/gc_inst/user_projects/domains/GCDomain/servers/EMGC_OMS1/logs/EMGC_OMS1.out</span><br><span class="line">Jul 31, 2020 6:08:19 PM oracle.security.jps.internal.policystore.util.JpsDataManagerUtil getDBConnection</span><br><span class="line">WARNING: Can not connect DB with URL jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.251.102)(PORT=1521)))(CONNECT_DATA=(SID=emcc)))	&lt;&lt;&lt;&lt;&lt;&lt;</span><br><span class="line">java.sql.SQLRecoverableException: IO Error: The Network Adapter could not establish the connection</span><br><span class="line">	at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:775)</span><br><span class="line">	at oracle.jdbc.driver.PhysicalConnection.connect(PhysicalConnection.java:819)</span><br><span class="line">	at oracle.jdbc.driver.T4CDriverExtension.getConnection(T4CDriverExtension.java:40)</span><br><span class="line">	at oracle.jdbc.driver.OracleDriver.connect(OracleDriver.java:704)</span><br><span class="line">	at java.sql.DriverManager.getConnection(DriverManager.java:664)</span><br><span class="line">	at java.sql.DriverManager.getConnection(DriverManager.java:208)</span><br><span class="line">	at oracle.security.jps.internal.policystore.util.JpsDataManagerUtil.getDBConnection(JpsDataManagerUtil.java:405)</span><br><span class="line">	at oracle.security.jps.internal.policystore.util.JpsDataManagerUtil.isNewSchema(JpsDataManagerUtil.java:246)</span><br><span class="line">	at oracle.security.jps.internal.core.datamanager.DataManagerFactoryImpl.isNewSchema(DataManagerFactoryImpl.java:252)</span><br><span class="line">	at oracle.security.jps.internal.core.datamanager.DataManagerFactoryImpl.getDBDataManager(DataManagerFactoryImpl.java:320)</span><br><span class="line">	at oracle.security.jps.internal.core.datamanager.DataManagerFactoryImpl.getDataManager(DataManagerFactoryImpl.java:186)</span><br><span class="line">	at oracle.security.jps.internal.core.datamanager.DataManagerFactoryImpl.getDataManager(DataManagerFactoryImpl.java:137)</span><br><span class="line">	at oracle.security.jps.internal.common.config.AbstractSecurityStore.createDataManager(AbstractSecurityStore.java:96)</span><br><span class="line">	at oracle.security.jps.internal.common.config.AbstractSecurityStore.getSecurityStoreVersionInternal(AbstractSecurityStore.java:164)</span><br><span class="line">	at oracle.security.jps.internal.common.config.AbstractSecurityStore.getSecurityStoreVersion(AbstractSecurityStore.java:146)</span><br><span class="line">	at oracle.security.jps.internal.credstore.ldap.LdapCredentialStore.init(LdapCredentialStore.java:185)</span><br><span class="line">	at oracle.security.jps.internal.credstore.ldap.LdapCredentialStore.start(LdapCredentialStore.java:1020)</span><br><span class="line">	at oracle.security.opss.internal.runtime.ServiceContextImpl.start(ServiceContextImpl.java:220)</span><br><span class="line">	at oracle.security.opss.internal.runtime.ServiceContextManagerImpl.createDefaultContext(ServiceContextManagerImpl.java:325)</span><br><span class="line">	at oracle.security.opss.internal.runtime.ServiceContextManagerImpl.initialize(ServiceContextManagerImpl.java:242)</span><br><span class="line">	at oracle.security.jps.internal.config.OpssCommonStartup<span class="variable">$1</span>.run(OpssCommonStartup.java:166)</span><br><span class="line">	at java.security.AccessController.doPrivileged(Native Method)</span><br><span class="line">	at oracle.security.jps.internal.config.OpssCommonStartup.start(OpssCommonStartup.java:159)</span><br><span class="line">	at oracle.security.jps.wls.JpsWlsStartup.start(JpsWlsStartup.java:105)</span><br><span class="line">	at oracle.security.jps.JpsStartup.startWithRetry(JpsStartup.java:287)</span><br><span class="line">	at oracle.security.jps.JpsStartup.start(JpsStartup.java:252)</span><br><span class="line">	at oracle.security.jps.wls.JpsDefaultService.start(JpsDefaultService.java:103)</span><br><span class="line">	at weblogic.server.AbstractServerService.postConstruct(AbstractServerService.java:76)</span><br><span class="line">	at sun.reflect.GeneratedMethodAccessor26.invoke(Unknown Source)</span><br><span class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</span><br><span class="line">	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.invoke(ReflectionHelper.java:1287)</span><br><span class="line">	at org.jvnet.hk2.internal.ClazzCreator.postConstructMe(ClazzCreator.java:333)</span><br><span class="line">	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:375)</span><br><span class="line">	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:487)</span><br><span class="line">	at org.glassfish.hk2.runlevel.internal.AsyncRunLevelContext.findOrCreate(AsyncRunLevelContext.java:305)</span><br><span class="line">	at org.glassfish.hk2.runlevel.RunLevelContext.findOrCreate(RunLevelContext.java:85)</span><br><span class="line">	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2126)</span><br><span class="line">	at org.jvnet.hk2.internal.ServiceHandleImpl.getService(ServiceHandleImpl.java:116)</span><br><span class="line">	at org.jvnet.hk2.internal.ServiceHandleImpl.getService(ServiceHandleImpl.java:90)</span><br><span class="line">	at org.glassfish.hk2.runlevel.internal.CurrentTaskFuture<span class="variable">$QueueRunner</span>.oneJob(CurrentTaskFuture.java:1237)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>发现无法连接到DB，检查监听</li>
-</ul>
+</li>
+<li><p>发现无法连接到DB，检查监听</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[oracle@pe-dbmonitor-emcc ~]$ lsnrctl status</span><br><span class="line"></span><br><span class="line">LSNRCTL <span class="keyword">for</span> Linux: Version 19.0.0.0.0 - Production on 02-DEC-2020 15:45:22</span><br><span class="line"></span><br><span class="line">Copyright (c) 1991, 2019, Oracle.  All rights reserved.</span><br><span class="line"></span><br><span class="line">Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=pe-dbmonitor-emcc)(PORT=1521)))</span><br><span class="line">TNS-12541: TNS:no listener</span><br><span class="line"> TNS-12560: TNS:protocol adapter error</span><br><span class="line">  TNS-00511: No listener</span><br><span class="line">   Linux Error: 111: Connection refused</span><br><span class="line">Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC1521)))</span><br><span class="line">TNS-12541: TNS:no listener</span><br><span class="line"> TNS-12560: TNS:protocol adapter error</span><br><span class="line">  TNS-00511: No listener</span><br><span class="line">   Linux Error: 2: No such file or directory</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>启动监听后，再启动OMS</li>
-</ul>
+</li>
+<li><p>启动监听后，再启动OMS</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[oracle@pe-dbmonitor-emcc bin]$ ./emctl start oms</span><br><span class="line">Oracle Enterprise Manager Cloud Control 13c Release 4  </span><br><span class="line">Copyright (c) 1996, 2020 Oracle Corporation.  All rights reserved.</span><br><span class="line">Starting Oracle Management Server...</span><br><span class="line">WebTier Successfully Started</span><br><span class="line">Oracle Management Server Successfully Started</span><br><span class="line">Oracle Management Server is Up</span><br><span class="line">JVMD Engine is Up</span><br><span class="line">Starting BI Publisher Server ...</span><br><span class="line">BI Publisher Server Successfully Started</span><br><span class="line">BI Publisher Server is Up</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/emcc134-oracle-management-server-could-not-be-started/" data-id="ckq8v7jn00009lom24z0z7quv" data-title="EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/emcc134-oracle-management-server-could-not-be-started/" data-id="ckq8yfx2n0008osm22u6o9equ" data-title="EMCC 13.4启动遭遇Oracle Management Server Could Not Be Started" class="article-share-link">Share</a>
       
       
       
@@ -548,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/01/27/database/asm-req_mir_free_mb-test/" data-id="ckq8v7jmv0004lom23346egvv" data-title="ASM中的Req_mir_free_MB实验" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/01/27/database/asm-req_mir_free_mb-test/" data-id="ckq8yfx2e0003osm22xcb3xgn" data-title="ASM中的Req_mir_free_MB实验" class="article-share-link">Share</a>
       
       
       

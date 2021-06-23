@@ -80,21 +80,21 @@
 <li><p>环境<br>CentOS Linux release 7.9.2009 (Core)</p>
 </li>
 <li><p>Messages日志</p>
-</li>
-</ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Apr  8 07:44:27 testdb02 kernel: sd 1:0:1:67: alua: port group 3e9 state N non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:44:33 testdb02 kernel: sd 1:0:0:67: alua: port group 3e9 state N non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:44:41 testdb02 kernel: sd 3:0:0:67: alua: port group 3e8 state A non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:44:46 testdb02 kernel: sd 3:0:1:67: alua: port group 3e8 state A non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:44:59 testdb02 kernel: sd 1:0:1:67: alua: port group 3e9 state N non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:45:02 testdb02 kernel: sd 3:0:0:67: alua: port group 3e8 state A non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:45:07 testdb02 kernel: sd 3:0:1:67: alua: port group 3e8 state A non-preferred supports TolUsNA</span><br><span class="line">Apr  8 07:45:14 testdb02 kernel: sd 1:0:0:67: alua: port group 3e9 state N non-preferred supports TolUsNA</span><br></pre></td></tr></table></figure>
 
 
+</li>
+</ul>
 <ul>
 <li><p>原因<br>如果存储支持ALUA（非对称逻辑单元访问），这些消息将显示检测到端口组及其支持的ALUA的状态。</p>
 </li>
 <li><p>处理<br>这些消息只是一些信息，不能表明在使用的环境有没有问题，如果现在使用的系统中有问题则这些消息具有参考的价值。</p>
 </li>
 <li><p>附加信息</p>
-</li>
-</ul>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Example：</span><br><span class="line">&gt; Apr  8 07:44:27 testdb02 kernel: sd 1:0:1:67: alua: port group 3e9 state N non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:44:33 testdb02 kernel: sd 1:0:0:67: alua: port group 3e9 state N non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:44:41 testdb02 kernel: sd 3:0:0:67: alua: port group 3e8 state A non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:44:46 testdb02 kernel: sd 3:0:1:67: alua: port group 3e8 state A non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:44:59 testdb02 kernel: sd 1:0:1:67: alua: port group 3e9 state N non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:45:02 testdb02 kernel: sd 3:0:0:67: alua: port group 3e8 state A non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:45:07 testdb02 kernel: sd 3:0:1:67: alua: port group 3e8 state A non-preferred supports TolUsNA  </span><br><span class="line">&gt; Apr  8 07:45:14 testdb02 kernel: sd 1:0:0:67: alua: port group 3e9 state N non-preferred supports TolUsNA</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <p><code>tolUsNA</code>中的每字母代表SCSI多路径配置中由LUN服务的目标端口组的非对称访问状态Transitioning/Offline/LBA/Unavail/Standby/Non-Opt active/Active.</p>
 <p>在初始化和配置目标端口组时，改配置规定了目标端口组可以使用哪些的非对称端口组状态进行报告，大写字母记录的状态是当前报告的目标端口组对给定的LUN能够使用的非对称访问状态.</p>
 <p><strong>对记录信息进行细分</strong></p>
@@ -106,7 +106,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mudbub.com/2021/04/12/linux/alua-port-group-messages/" data-id="ckq8v7jo1002wlom290svfigv" data-title="ALUA port group messages" class="article-share-link">Share</a>
+      <a data-url="http://mudbub.com/2021/04/12/linux/alua-port-group-messages/" data-id="ckq8yfx3u002qosm2f5pja5gy" data-title="ALUA port group messages" class="article-share-link">Share</a>
       
       
       
